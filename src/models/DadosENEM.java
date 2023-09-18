@@ -2,8 +2,10 @@ package models;
 
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Stream;
+import java.util.TreeMap;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class DadosENEM {
   private String ano;
@@ -27,23 +29,22 @@ public class DadosENEM {
     Map<String, Integer> inscritosPorGenero = new HashMap<>();
 
     String contagemMasculino = colunaInscritosPorGenero.stream()
-      .reduce("0", (acc, elementoColuna) -> {
-        int accNum = Integer.parseInt(acc);
-        if (elementoColuna.equals("M"))
-          accNum += 1;
-        acc = "" + accNum;
-        return acc;
-      });
+        .reduce("0", (acc, elementoColuna) -> {
+          int accNum = Integer.parseInt(acc);
+          if (elementoColuna.equals("M"))
+            accNum += 1;
+          acc = "" + accNum;
+          return acc;
+        });
 
     String contagemFeminino = colunaInscritosPorGenero.stream()
-      .reduce("0", (acc, elementoColuna) -> {
-        int accNum = Integer.parseInt(acc);
-        if (elementoColuna.equals("M"))
-          accNum += 1;
-        acc = "" + accNum;
-        return acc;  
-      });
-
+        .reduce("0", (acc, elementoColuna) -> {
+          int accNum = Integer.parseInt(acc);
+          if (elementoColuna.equals("M"))
+            accNum += 1;
+          acc = "" + accNum;
+          return acc;
+        });
 
     inscritosPorGenero.put("Masculino", Integer.parseInt(contagemMasculino));
     inscritosPorGenero.put("Feminino", Integer.parseInt(contagemFeminino));
@@ -60,8 +61,8 @@ public class DadosENEM {
     double percentualFeminino = 0;
     int total = inscritosMasculino + inscritosFeminino;
 
-    percentualMasculino = ((double)inscritosMasculino / total) * 100;
-    percentualFeminino = ((double)inscritosFeminino / total) * 100;
+    percentualMasculino = ((double) inscritosMasculino / total) * 100;
+    percentualFeminino = ((double) inscritosFeminino / total) * 100;
 
     percentualInscritosPorGenero.put("Masculino", percentualMasculino);
     percentualInscritosPorGenero.put("Feminino", percentualFeminino);
@@ -84,7 +85,73 @@ public class DadosENEM {
   public int obterTotalAusentes() {
     return obterTotalInscritos() - obterTotalPresentes();
   }
-  
+
+  public Map<String, Integer> obterRelacaoEstados() {
+    Map<String, Integer> relacao = new TreeMap<>();
+    List<String> colunaUF = arquivoCSV.obterColuna("SG_UF_RESIDENCIA");
+
+    for (String uf : colunaUF) {
+      if (!relacao.containsKey(uf)) {
+        relacao.put(uf, 1);
+      } else {
+        int valorAntigo = relacao.get(uf);
+        relacao.put(uf, valorAntigo + 1);
+      }
+    }
+
+    return ordenarAlfabeticamenteInt(relacao);
+  }
+
+  public Map<String, Double> obterRelacaoEstadosPercentual() {
+    Map<String, Double> relacaoPercentual = new TreeMap<>();
+    Map<String, Integer> relacaoNumerica = obterRelacaoEstados();
+    int totalInscritos = obterTotalInscritos();
+
+    Iterator<Map.Entry<String, Integer>> mapIterator = relacaoNumerica.entrySet().iterator();
+
+    while (mapIterator.hasNext()) {
+      Map.Entry<String, Integer> proximoValor = mapIterator.next();
+      String uf = proximoValor.getKey();
+      double percentual = proximoValor.getValue();
+      percentual = (percentual / totalInscritos) * 100;
+      relacaoPercentual.put(uf, percentual);
+    }
+
+    return ordenarAlfabeticamenteDouble(relacaoPercentual);
+  }
+
+  private Map<String, Integer> ordenarAlfabeticamenteInt(Map<String, Integer> mapa) {
+    Map<String, Integer> mapaOrdenado = new TreeMap<>(
+      new Comparator<String>() {
+
+        @Override
+        public int compare(String str1, String str2) {
+          return str1.compareTo(str2);
+        }
+      }
+    );
+      
+    mapaOrdenado.putAll(mapa);
+
+    return mapaOrdenado;
+  }
+
+  private Map<String, Double> ordenarAlfabeticamenteDouble(Map<String, Double> mapa) {
+    Map<String, Double> mapaOrdenado = new TreeMap<>(
+      new Comparator<String>() {
+
+        @Override
+        public int compare(String str1, String str2) {
+          return str1.compareTo(str2);
+        }
+      }
+    );
+      
+    mapaOrdenado.putAll(mapa);
+
+    return mapaOrdenado;
+  }
+
   public String obterAno() {
     return ano;
   }
