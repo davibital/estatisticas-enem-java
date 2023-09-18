@@ -25,14 +25,28 @@ public class DadosENEM {
   public Map<String, Integer> obterNumeroInscritosPorGenero() {
     List<String> colunaInscritosPorGenero = arquivoCSV.obterColuna("TP_SEXO");
     Map<String, Integer> inscritosPorGenero = new HashMap<>();
-    Stream<String> generoMasculino = colunaInscritosPorGenero.stream().filter(genero -> genero.equals("M"));
-    Stream<String> generoFeminino = colunaInscritosPorGenero.stream().filter(genero -> genero.equals("F"));
-    
-    int contagemMasculino = (int) generoMasculino.count();
-    int contagemFeminino = (int) generoFeminino.count(); 
 
-    inscritosPorGenero.put("Masculino", contagemMasculino);
-    inscritosPorGenero.put("Feminino", contagemFeminino);
+    String contagemMasculino = colunaInscritosPorGenero.stream()
+      .reduce("0", (acc, elementoColuna) -> {
+        int accNum = Integer.parseInt(acc);
+        if (elementoColuna.equals("M"))
+          accNum += 1;
+        acc = "" + accNum;
+        return acc;
+      });
+
+    String contagemFeminino = colunaInscritosPorGenero.stream()
+      .reduce("0", (acc, elementoColuna) -> {
+        int accNum = Integer.parseInt(acc);
+        if (elementoColuna.equals("M"))
+          accNum += 1;
+        acc = "" + accNum;
+        return acc;  
+      });
+
+
+    inscritosPorGenero.put("Masculino", Integer.parseInt(contagemMasculino));
+    inscritosPorGenero.put("Feminino", Integer.parseInt(contagemFeminino));
 
     return inscritosPorGenero;
   }
@@ -70,7 +84,7 @@ public class DadosENEM {
   public int obterTotalAusentes() {
     return obterTotalInscritos() - obterTotalPresentes();
   }
-    
+  
   public String obterAno() {
     return ano;
   }
