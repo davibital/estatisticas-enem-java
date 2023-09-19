@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class DadosEnemAntigo extends DadosEnem {
-  
+
   public DadosEnemAntigo(int ano) {
     try {
       if (ano >= 2009)
@@ -14,7 +14,7 @@ public class DadosEnemAntigo extends DadosEnem {
       arquivoCSV = new ArquivoCSV("microdados-enem/");
       String nomeArquivo = "MICRODADOS_ENEM_" + ano;
       arquivoCSV.carregarArquivo(nomeArquivo);
-      
+
       this.ano = "" + ano;
     } catch (IllegalArgumentException e) {
       System.err.println(e.getMessage());
@@ -22,22 +22,25 @@ public class DadosEnemAntigo extends DadosEnem {
     }
   }
 
-  @Override
-  public int obterTotalPresentes() {
-    int totalPresentes = 0;
+  public Map<String, Integer> obterRelacaoPresenca() {
     List<String> relacaoParticipantes = arquivoCSV.obterColuna("TP_PRESENCA");
+    Map<String, Integer> relacaoPresenca = new TreeMap<>();
+    relacaoPresenca.put("Presentes", 0);
+    relacaoPresenca.put("Ausentes", 0);
 
-    for (String presenca : relacaoParticipantes) {
-      if (presenca.equals("1"))
-        totalPresentes++;
+    for (String tipoPresenca : relacaoParticipantes) {
+
+      if (tipoPresenca.equals("1"))
+        tipoPresenca = "Presentes";
+      else
+        tipoPresenca = "Ausentes";
+
+      int novoValor = relacaoPresenca.get(tipoPresenca) + 1;
+
+      relacaoPresenca.put(tipoPresenca, novoValor);
     }
-
-    return totalPresentes;
-  }
-
-  @Override
-  public int obterTotalAusentes() {
-    return obterTotalInscritos() - obterTotalPresentes();
+    
+    return relacaoPresenca;
   }
 
   @Override
@@ -57,7 +60,6 @@ public class DadosEnemAntigo extends DadosEnem {
     return ordenarAlfabeticamenteInt(relacao);
   }
 
-  @Override
   public double obterMediaNotasProvaObjetiva() {
     List<String> notasString = arquivoCSV.obterColuna("NU_NOTA_OBJETIVA");
     return obterMediaValores(notasString);
