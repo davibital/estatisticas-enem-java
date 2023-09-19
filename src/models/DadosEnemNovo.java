@@ -21,27 +21,8 @@ public class DadosEnemNovo extends DadosEnem {
   }
 
   @Override
-  public int obterTotalPresentes() {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'obterTotalPresentes'");
-  }
-
-  @Override
-  public int obterTotalAusentes() {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'obterTotalAusentes'");
-  }
-
-  @Override
   public Map<String, Integer> obterRelacaoEstados() {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'obterRelacaoEstados'");
-  }
-
-  @Override
-  public double obterMediaNotasProvaObjetiva() {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'obterMediaNotasProvaObjetiva'");
+    
   }
   
 }
