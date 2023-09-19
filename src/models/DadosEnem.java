@@ -10,13 +10,7 @@ public abstract class DadosEnem {
   protected String ano;
   protected ArquivoCSV arquivoCSV;
 
-  public abstract int obterTotalPresentes();
-
-  public abstract int obterTotalAusentes();
-
   public abstract Map<String, Integer> obterRelacaoEstados();
-
-  public abstract double obterMediaNotasProvaObjetiva();
 
   public int obterTotalInscritos() {
     List<String> linhasTabela = arquivoCSV.obterColuna("NU_INSCRICAO");
