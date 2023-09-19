@@ -151,6 +151,35 @@ public class DadosENEM {
     return mapaOrdenado;
   }
 
+  public double obterMediaNotasProvaObjetiva() {
+    List<String> notasString = arquivoCSV.obterColuna("NU_NOTA_OBJETIVA");
+    return obterMedia(notasString);
+  }
+  
+  public double obterMediaNotasRedacao() {
+    List<String> notasString = arquivoCSV.obterColuna("NU_NOTA_REDACAO");
+    return obterMedia(notasString);
+  }
+
+  private double obterMedia(List<String> notasString) {
+    double notaTotal = 0;
+    double totalInscritos = 0;
+    double media;
+
+    for (String notaString : notasString) {
+      if (notaString.isEmpty())
+        notaString = "0";
+
+      double notaNum = Double.parseDouble(notaString);
+      notaTotal += notaNum;
+      totalInscritos++;
+    }
+
+    media = notaTotal / totalInscritos;
+
+    return media;
+  }
+
   public String obterAno() {
     return ano;
   }
