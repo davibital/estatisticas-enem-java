@@ -6,17 +6,17 @@ import java.util.Comparator;
 import java.util.TreeMap;
 import java.util.Iterator;
 
-public class DadosENEM {
-  private String ano;
-  private ArquivoCSV arquivoCSV;
+public abstract class DadosEnem {
+  protected String ano;
+  protected ArquivoCSV arquivoCSV;
 
-  public DadosENEM(String ano) {
-    arquivoCSV = new ArquivoCSV("microdados-enem/");
-    String nomeArquivo = "MICRODADOS_ENEM_" + ano;
-    arquivoCSV.carregarArquivo(nomeArquivo);
+  public abstract int obterTotalPresentes();
 
-    this.ano = ano;
-  }
+  public abstract int obterTotalAusentes();
+
+  public abstract Map<String, Integer> obterRelacaoEstados();
+
+  public abstract double obterMediaNotasProvaObjetiva();
 
   public int obterTotalInscritos() {
     List<String> linhasTabela = arquivoCSV.obterColuna("NU_INSCRICAO");
@@ -69,38 +69,6 @@ public class DadosENEM {
     return percentualInscritosPorGenero;
   }
 
-  public int obterTotalPresentes() {
-    int totalPresentes = 0;
-    List<String> relacaoParticipantes = arquivoCSV.obterColuna("TP_PRESENCA");
-
-    for (String presenca : relacaoParticipantes) {
-      if (presenca.equals("1"))
-        totalPresentes++;
-    }
-
-    return totalPresentes;
-  }
-
-  public int obterTotalAusentes() {
-    return obterTotalInscritos() - obterTotalPresentes();
-  }
-
-  public Map<String, Integer> obterRelacaoEstados() {
-    Map<String, Integer> relacao = new TreeMap<>();
-    List<String> colunaUF = arquivoCSV.obterColuna("SG_UF_RESIDENCIA");
-
-    for (String uf : colunaUF) {
-      if (!relacao.containsKey(uf)) {
-        relacao.put(uf, 1);
-      } else {
-        int valorAntigo = relacao.get(uf);
-        relacao.put(uf, valorAntigo + 1);
-      }
-    }
-
-    return ordenarAlfabeticamenteInt(relacao);
-  }
-
   public Map<String, Double> obterRelacaoEstadosPercentual() {
     Map<String, Double> relacaoPercentual = new TreeMap<>();
     Map<String, Integer> relacaoNumerica = obterRelacaoEstados();
@@ -119,7 +87,7 @@ public class DadosENEM {
     return ordenarAlfabeticamenteDouble(relacaoPercentual);
   }
 
-  private Map<String, Integer> ordenarAlfabeticamenteInt(Map<String, Integer> mapa) {
+  protected Map<String, Integer> ordenarAlfabeticamenteInt(Map<String, Integer> mapa) {
     Map<String, Integer> mapaOrdenado = new TreeMap<>(
       new Comparator<String>() {
 
@@ -135,7 +103,7 @@ public class DadosENEM {
     return mapaOrdenado;
   }
 
-  private Map<String, Double> ordenarAlfabeticamenteDouble(Map<String, Double> mapa) {
+  protected Map<String, Double> ordenarAlfabeticamenteDouble(Map<String, Double> mapa) {
     Map<String, Double> mapaOrdenado = new TreeMap<>(
       new Comparator<String>() {
 
@@ -150,32 +118,27 @@ public class DadosENEM {
 
     return mapaOrdenado;
   }
-
-  public double obterMediaNotasProvaObjetiva() {
-    List<String> notasString = arquivoCSV.obterColuna("NU_NOTA_OBJETIVA");
-    return obterMedia(notasString);
-  }
   
   public double obterMediaNotasRedacao() {
     List<String> notasString = arquivoCSV.obterColuna("NU_NOTA_REDACAO");
-    return obterMedia(notasString);
+    return obterMediaValores(notasString);
   }
 
-  private double obterMedia(List<String> notasString) {
-    double notaTotal = 0;
-    double totalInscritos = 0;
+  protected double obterMediaValores(List<String> valores) {
+    double valorTotal = 0;
+    double quantidade = 0;
     double media;
 
-    for (String notaString : notasString) {
-      if (notaString.isEmpty())
-        notaString = "0";
+    for (String valorString : valores) {
+      if (valorString.isEmpty())
+        valorString = "0";
 
-      double notaNum = Double.parseDouble(notaString);
-      notaTotal += notaNum;
-      totalInscritos++;
+      double notaNum = Double.parseDouble(valorString);
+      valorTotal += notaNum;
+      quantidade++;
     }
 
-    media = notaTotal / totalInscritos;
+    media = valorTotal / quantidade;
 
     return media;
   }
