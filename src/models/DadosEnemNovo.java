@@ -1,6 +1,8 @@
 package models;
 
+import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class DadosEnemNovo extends DadosEnem {
 
@@ -22,7 +24,19 @@ public class DadosEnemNovo extends DadosEnem {
 
   @Override
   public Map<String, Integer> obterRelacaoEstados() {
-    
+    Map<String, Integer> relacao = new TreeMap<>();
+    List<String> colunaUF = arquivoCSV.obterColuna("SG_UF_ESC");
+
+    for (String uf : colunaUF) {
+      if (!relacao.containsKey(uf)) {
+        relacao.put(uf, 1);
+      } else {
+        int valorAntigo = relacao.get(uf);
+        relacao.put(uf, valorAntigo + 1);
+      }
+    }
+
+    return ordenarAlfabeticamenteInt(relacao);
   }
   
 }
