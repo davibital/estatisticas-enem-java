@@ -77,5 +77,21 @@ public class DadosEnemNovo extends DadosEnem {
   public Map<String, Integer> obterRelacaoPresencaMT() {
     return obterRelacaoPresenca(arquivoCSV.obterColuna("TP_PRESENCA_MT"));
   }
+
+  public double obterMediaProvaCN() {
+    return obterMediaValores(arquivoCSV.obterColuna("NU_NOTA_CN"));
+  }
+
+  public double obterMediaProvaCH() {
+    return obterMediaValores(arquivoCSV.obterColuna("NU_NOTA_CH"));
+  }
+
+  public double obterMediaProvaLC() {
+    return obterMediaValores(arquivoCSV.obterColuna("NU_NOTA_LC"));
+  }
+
+  public double obterMediaProvaMT() {
+    return obterMediaValores(arquivoCSV.obterColuna("NU_NOTA_MT"));
+  }
   
 }
