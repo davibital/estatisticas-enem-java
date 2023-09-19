@@ -11,7 +11,7 @@ public class DadosEnemAntigo extends DadosEnem {
       if (ano >= 2009)
         throw new IllegalArgumentException("Ano inválido!");
 
-      arquivoCSV = new ArquivoCSV("microdados-enem/");
+      arquivoCSV = new ArquivoCSV("microdados-enem/antigo/");
       String nomeArquivo = "MICRODADOS_ENEM_" + ano;
       arquivoCSV.carregarArquivo(nomeArquivo);
 
