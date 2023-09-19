@@ -2,9 +2,8 @@ package models;
 
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.Comparator;
-import java.util.HashMap;
+import java.util.TreeMap;
 import java.util.Iterator;
 
 public class DadosENEM {
@@ -26,7 +25,7 @@ public class DadosENEM {
 
   public Map<String, Integer> obterNumeroInscritosPorGenero() {
     List<String> colunaInscritosPorGenero = arquivoCSV.obterColuna("TP_SEXO");
-    Map<String, Integer> inscritosPorGenero = new HashMap<>();
+    Map<String, Integer> inscritosPorGenero = new TreeMap<>();
 
     String contagemMasculino = colunaInscritosPorGenero.stream()
         .reduce("0", (acc, elementoColuna) -> {
@@ -53,7 +52,7 @@ public class DadosENEM {
   }
 
   public Map<String, Double> obterPercentualInscritosPorGenero() {
-    Map<String, Double> percentualInscritosPorGenero = new HashMap<>();
+    Map<String, Double> percentualInscritosPorGenero = new TreeMap<>();
 
     int inscritosMasculino = obterNumeroInscritosPorGenero().get("Masculino");
     int inscritosFeminino = obterNumeroInscritosPorGenero().get("Feminino");
