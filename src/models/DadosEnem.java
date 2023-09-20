@@ -40,26 +40,35 @@ public abstract class DadosEnem {
           return acc;
         });
 
+    int dadosNaoInformados = (int) arquivoCSV.obterQuantidadeLinhasValidas() - obterTotalInscritos();
+
     inscritosPorGenero.put("Masculino", Integer.parseInt(contagemMasculino));
     inscritosPorGenero.put("Feminino", Integer.parseInt(contagemFeminino));
+    inscritosPorGenero.put("Dados não informados", dadosNaoInformados);
 
     return inscritosPorGenero;
   }
 
   public Map<String, Double> obterPercentualInscritosPorGenero() {
+    Map<String, Integer> numerosInscritosPorGenero = obterNumeroInscritosPorGenero();
     Map<String, Double> percentualInscritosPorGenero = new TreeMap<>();
 
-    int inscritosMasculino = obterNumeroInscritosPorGenero().get("Masculino");
-    int inscritosFeminino = obterNumeroInscritosPorGenero().get("Feminino");
+    int inscritosMasculino = numerosInscritosPorGenero.get("Masculino");
+    int inscritosFeminino = numerosInscritosPorGenero.get("Feminino");
+    int dadosNaoInformados = numerosInscritosPorGenero.get("Dados não informados");
+    
     double percentualMasculino = 0;
     double percentualFeminino = 0;
-    int total = inscritosMasculino + inscritosFeminino;
+    double percentualNaoInformado = 0;
+    int total = inscritosMasculino + inscritosFeminino + dadosNaoInformados;
 
     percentualMasculino = ((double) inscritosMasculino / total) * 100;
     percentualFeminino = ((double) inscritosFeminino / total) * 100;
+    percentualNaoInformado = ((double) dadosNaoInformados / total) * 100;
 
     percentualInscritosPorGenero.put("Masculino", percentualMasculino);
     percentualInscritosPorGenero.put("Feminino", percentualFeminino);
+    percentualInscritosPorGenero.put("Dados não informados", percentualNaoInformado);
 
     return percentualInscritosPorGenero;
   }
