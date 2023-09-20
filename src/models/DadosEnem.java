@@ -14,7 +14,8 @@ public abstract class DadosEnem {
 
   public int obterTotalInscritos() {
     List<String> linhasTabela = arquivoCSV.obterColuna("NU_INSCRICAO");
-    return linhasTabela.size();
+    // Retorna penúltima linha da tabela, que contém o maior número de inscrição
+    return Integer.parseInt(linhasTabela.get(linhasTabela.size() - 1));
   }
 
   public Map<String, Integer> obterNumeroInscritosPorGenero() {
@@ -33,7 +34,7 @@ public abstract class DadosEnem {
     String contagemFeminino = colunaInscritosPorGenero.stream()
         .reduce("0", (acc, elementoColuna) -> {
           int accNum = Integer.parseInt(acc);
-          if (elementoColuna.equals("M"))
+          if (elementoColuna.equals("F"))
             accNum += 1;
           acc = "" + accNum;
           return acc;
