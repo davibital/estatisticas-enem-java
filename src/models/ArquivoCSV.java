@@ -2,14 +2,17 @@ package models;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 public class ArquivoCSV {
   private String caminhoArquivo;
   private String arquivo;
+  private long quantidadeLinhasValidas;
   private List<String> nomeColunasArquivo;
 
   public ArquivoCSV(String caminhoArquivo) {
@@ -19,10 +22,13 @@ public class ArquivoCSV {
 
   public void carregarArquivo(String nomeArquivo) {
     Scanner varredorArquivo = null;
+    Stream<String> streamLinhasArquivo = null;
     arquivo = caminhoArquivo + nomeArquivo + ".csv";
 
     try {
       varredorArquivo = new Scanner(new File(arquivo));
+      streamLinhasArquivo = Files.lines(new File(arquivo).toPath());
+      quantidadeLinhasValidas = streamLinhasArquivo.count() - 1;
 
       String[] primeiraLinha = varredorArquivo.nextLine().split(";");
 
@@ -32,7 +38,12 @@ public class ArquivoCSV {
       System.err.println("Informe o nome do arquivo corretamente!");
     } finally {
       varredorArquivo.close();
+      streamLinhasArquivo.close();
     }
+  }
+
+  public long obterQuantidadeLinhasValidas() {
+    return quantidadeLinhasValidas;
   }
   
   public List<String> obterColuna(String nomeColuna) {
