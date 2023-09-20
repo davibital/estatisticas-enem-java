@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <BorderPane layoutY="14.0" prefHeight="42.0" prefWidth="600.0">
+         <top>
+            <ToolBar prefHeight="27.0" prefWidth="401.0" BorderPane.alignment="CENTER">
+               <items>
+                  <TextField editable="false" prefHeight="18.0" prefWidth="179.0" scaleShape="false" text="insira o período a ser analisado" />
+                  <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="12.0" />
+                  <Spinner editable="true" prefHeight="25.0" prefWidth="90.0" />
+                  <Spinner editable="true" prefHeight="25.0" prefWidth="90.0" />
+                  <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="6.0" />
+                  <Button mnemonicParsing="false" text="Plotar" textAlignment="CENTER" textOverrun="CENTER_WORD_ELLIPSIS" />
+               </items>
+            </ToolBar>
+         </top>
+      </BorderPane>
+      <LineChart fx:id="num_InsAnoDOT" layoutX="13.0" layoutY="62.0" prefHeight="324.0" prefWidth="575.0" title="NÚMERO DE INSCRITOS EM CADA ANO">
+        <xAxis>
+          <CategoryAxis label="ANOS" side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis label="INSCRITOS" side="LEFT" />
+        </yAxis>
+      </LineChart>
+   </children>
+</AnchorPane>
