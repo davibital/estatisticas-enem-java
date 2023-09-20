@@ -8,70 +8,91 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TelaInicialController">
    <children>
-      <BorderPane layoutX="30.0" layoutY="117.0" AnchorPane.bottomAnchor="57.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="117.0">
+      <BorderPane layoutX="200.0" layoutY="100.0" prefHeight="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
          <top>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Selecione o modelo a ser analisado:" textAlignment="CENTER" BorderPane.alignment="CENTER">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Estatísticas ENEM" textAlignment="CENTER" BorderPane.alignment="CENTER">
                <font>
-                  <Font size="18.0" />
+                  <Font size="36.0" />
                </font>
                <BorderPane.margin>
-                  <Insets top="10.0" />
+                  <Insets bottom="5.0" top="50.0" />
                </BorderPane.margin>
             </Text>
          </top>
-         <left>
-            <BorderPane BorderPane.alignment="CENTER">
+         <center>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <BorderPane.margin>
-                  <Insets top="20.0" />
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </BorderPane.margin>
-               <center>
-                  <Button fx:id="botaoEnemAntigo" mnemonicParsing="false" onAction="#analisarEnemAntigo" prefHeight="50.0" prefWidth="150.0" text="ENEM Antigo" BorderPane.alignment="CENTER">
+               <top>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Selecione o modelo a ser analisado:" textAlignment="CENTER" BorderPane.alignment="CENTER">
                      <font>
                         <Font size="18.0" />
                      </font>
-                  </Button>
-               </center>
-               <bottom>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="De 1998 a 2008" textAlignment="CENTER" BorderPane.alignment="CENTER">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
+                     <BorderPane.margin>
+                        <Insets bottom="5.0" top="15.0" />
+                     </BorderPane.margin>
                   </Text>
-               </bottom>
-               <padding>
-                  <Insets left="50.0" />
-               </padding>
-            </BorderPane>
-         </left>
-         <right>
-            <BorderPane BorderPane.alignment="CENTER">
-               <BorderPane.margin>
-                  <Insets top="20.0" />
-               </BorderPane.margin>
+               </top>
                <center>
-                  <Button fx:id="botaoEnemNovo" mnemonicParsing="false" onAction="#analisarEnemNovo" prefHeight="50.0" prefWidth="150.0" text="ENEM Novo" BorderPane.alignment="CENTER">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Button>
+                  <GridPane BorderPane.alignment="CENTER">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0">
+                           <center>
+                              <Button fx:id="botaoEnemAntigo" alignment="CENTER" contentDisplay="CENTER" maxHeight="50.0" maxWidth="150.0" mnemonicParsing="false" onAction="#analisarEnemAntigo" prefHeight="50.0" prefWidth="150.0" text="ENEM antigo" textAlignment="CENTER" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <BorderPane.margin>
+                                    <Insets top="20.0" />
+                                 </BorderPane.margin>
+                              </Button>
+                           </center>
+                           <bottom>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="De 1998 a 2008" textAlignment="CENTER" BorderPane.alignment="TOP_CENTER">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <BorderPane.margin>
+                                    <Insets bottom="100.0" top="10.0" />
+                                 </BorderPane.margin>
+                              </Text>
+                           </bottom>
+                        </BorderPane>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                           <center>
+                              <Button fx:id="botaoEnemNovo" alignment="CENTER" contentDisplay="CENTER" maxHeight="50.0" maxWidth="150.0" mnemonicParsing="false" onAction="#analisarEnemNovo" prefHeight="50.0" prefWidth="150.0" text="ENEM novo" textAlignment="CENTER" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <BorderPane.margin>
+                                    <Insets top="20.0" />
+                                 </BorderPane.margin>
+                              </Button>
+                           </center>
+                           <bottom>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="De 2009 a 2022" textAlignment="CENTER" BorderPane.alignment="TOP_CENTER">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <BorderPane.margin>
+                                    <Insets bottom="100.0" top="10.0" />
+                                 </BorderPane.margin>
+                              </Text>
+                           </bottom>
+                        </BorderPane>
+                     </children>
+                  </GridPane>
                </center>
-               <bottom>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="De 2009 a 2022" BorderPane.alignment="CENTER">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Text>
-               </bottom>
-               <padding>
-                  <Insets right="50.0" />
-               </padding>
             </BorderPane>
-         </right>
+         </center>
       </BorderPane>
-      <Text layoutX="36.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Estatísticas ENEM" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="528.13671875">
-         <font>
-            <Font size="36.0" />
-         </font>
-      </Text>
    </children>
 </AnchorPane>
