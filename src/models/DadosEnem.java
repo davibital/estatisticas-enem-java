@@ -32,6 +32,8 @@ public abstract class DadosEnem {
     relacaoIdade.put("Entre 51 e 55 anos", 0);
     relacaoIdade.put("Entre 56 e 60 anos", 0);
     relacaoIdade.put("Maior de 60 anos", 0);
+
+    int contagemNaoInformados = 0;
     
     for (String codigo : colunaIdade) {
       int codigoNum = Integer.parseInt(codigo);
@@ -56,11 +58,13 @@ public abstract class DadosEnem {
         incrementarEm(relacaoIdade, "Entre 51 e 55 anos");
       else if (codigoNum == 17)
         incrementarEm(relacaoIdade, "Entre 56 e 60 anos");
-      else
+      else if (codigoNum <= 20)
         incrementarEm(relacaoIdade, "Maior de 60 anos");
+      else
+        contagemNaoInformados++;
     }
 
-    int dadosNaoInformados = obterTotalInscritos() - (int) arquivoCSV.obterQuantidadeLinhasValidas();
+    int dadosNaoInformados = contagemNaoInformados + obterTotalInscritos() - (int) arquivoCSV.obterQuantidadeLinhasValidas();
 
     relacaoIdade.put("Dados não informados", dadosNaoInformados);
 
