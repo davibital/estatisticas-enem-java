@@ -90,28 +90,23 @@ public abstract class DadosEnem {
     List<String> colunaInscritosPorGenero = arquivoCSV.obterColuna("TP_SEXO");
     Map<String, Integer> inscritosPorGenero = new TreeMap<>();
 
-    String contagemMasculino = colunaInscritosPorGenero.stream()
-        .reduce("0", (acc, elementoColuna) -> {
-          int accNum = Integer.parseInt(acc);
-          if (elementoColuna.equals("M"))
-            accNum += 1;
-          acc = "" + accNum;
-          return acc;
-        });
+    int contagemMasculino = 0;
+    int contagemFeminino = 0;
+    int contagemNaoInformados = 0;
 
-    String contagemFeminino = colunaInscritosPorGenero.stream()
-        .reduce("0", (acc, elementoColuna) -> {
-          int accNum = Integer.parseInt(acc);
-          if (elementoColuna.equals("F"))
-            accNum += 1;
-          acc = "" + accNum;
-          return acc;
-        });
+    for (String elemento : colunaInscritosPorGenero) {
+      if (elemento.equals("M"))
+        contagemMasculino++;
+      else if (elemento.equals("F"))
+        contagemFeminino++;
+      else
+        contagemNaoInformados++;
+    }
 
-    int dadosNaoInformados = obterTotalInscritos() - (int) arquivoCSV.obterQuantidadeLinhasValidas();
+    int dadosNaoInformados = contagemNaoInformados + obterTotalInscritos() - (int) arquivoCSV.obterQuantidadeLinhasValidas();
 
-    inscritosPorGenero.put("Masculino", Integer.parseInt(contagemMasculino));
-    inscritosPorGenero.put("Feminino", Integer.parseInt(contagemFeminino));
+    inscritosPorGenero.put("Masculino", contagemMasculino);
+    inscritosPorGenero.put("Feminino", contagemFeminino);
     inscritosPorGenero.put("Dados não informados", dadosNaoInformados);
 
     return inscritosPorGenero;
