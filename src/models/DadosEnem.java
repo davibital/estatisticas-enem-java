@@ -121,22 +121,12 @@ public abstract class DadosEnem {
     Map<String, Integer> numerosInscritosPorGenero = obterNumeroInscritosPorGenero();
     Map<String, Double> percentualInscritosPorGenero = new TreeMap<>();
 
-    int inscritosMasculino = numerosInscritosPorGenero.get("Masculino");
-    int inscritosFeminino = numerosInscritosPorGenero.get("Feminino");
-    int dadosNaoInformados = numerosInscritosPorGenero.get("Dados não informados");
-    
-    double percentualMasculino = 0;
-    double percentualFeminino = 0;
-    double percentualNaoInformado = 0;
-    int total = inscritosMasculino + inscritosFeminino + dadosNaoInformados;
+    int total = obterTotalInscritos();
 
-    percentualMasculino = ((double) inscritosMasculino / total) * 100;
-    percentualFeminino = ((double) inscritosFeminino / total) * 100;
-    percentualNaoInformado = ((double) dadosNaoInformados / total) * 100;
-
-    percentualInscritosPorGenero.put("Masculino", percentualMasculino);
-    percentualInscritosPorGenero.put("Feminino", percentualFeminino);
-    percentualInscritosPorGenero.put("Dados não informados", percentualNaoInformado);
+    numerosInscritosPorGenero.forEach((chave, valor) -> {
+      double valorPercentual = ((double) valor / total) * 100;
+      percentualInscritosPorGenero.put(chave, valorPercentual);
+    });
 
     return percentualInscritosPorGenero;
   }
