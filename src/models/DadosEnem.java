@@ -18,6 +18,74 @@ public abstract class DadosEnem {
     return Integer.parseInt(linhasTabela.get(linhasTabela.size() - 1));
   }
 
+  public Map<String, Integer> obterRelacaoIdade() {
+    List<String> colunaIdade = arquivoCSV.obterColuna("TP_FAIXA_ETARIA");
+    Map<String, Integer> relacaoIdade = new TreeMap<>();
+    relacaoIdade.put("Menor de 17 anos", 0);
+    relacaoIdade.put("Entre 17 e 20 anos", 0);
+    relacaoIdade.put("Entre 21 e 25 anos", 0);
+    relacaoIdade.put("Entre 26 e 30 anos", 0);
+    relacaoIdade.put("Entre 31 e 35 anos", 0);
+    relacaoIdade.put("Entre 36 e 40 anos", 0);
+    relacaoIdade.put("Entre 41 e 45 anos", 0);
+    relacaoIdade.put("Entre 46 e 50 anos", 0);
+    relacaoIdade.put("Entre 51 e 55 anos", 0);
+    relacaoIdade.put("Entre 56 e 60 anos", 0);
+    relacaoIdade.put("Maior de 60 anos", 0);
+    
+    for (String codigo : colunaIdade) {
+      int codigoNum = Integer.parseInt(codigo);
+
+      if (codigoNum < 1)
+        incrementarEm(relacaoIdade, "Menor de 17 anos");
+      else if (codigoNum <= 5)
+        incrementarEm(relacaoIdade, "Entre 17 e 20 anos");
+      else if (codigoNum <= 10)
+        incrementarEm(relacaoIdade, "Entre 21 e 25 anos");
+      else if (codigoNum == 11)
+        incrementarEm(relacaoIdade, "Entre 26 e 30 anos");
+      else if (codigoNum == 12)
+        incrementarEm(relacaoIdade, "Entre 31 e 35 anos");
+      else if (codigoNum == 13)
+        incrementarEm(relacaoIdade, "Entre 36 e 40 anos");
+      else if (codigoNum == 14)
+        incrementarEm(relacaoIdade, "Entre 41 e 45 anos");
+      else if (codigoNum == 15)
+        incrementarEm(relacaoIdade, "Entre 46 e 50 anos");
+      else if (codigoNum == 16)
+        incrementarEm(relacaoIdade, "Entre 51 e 55 anos");
+      else if (codigoNum == 17)
+        incrementarEm(relacaoIdade, "Entre 56 e 60 anos");
+      else
+        incrementarEm(relacaoIdade, "Maior de 60 anos");
+    }
+
+    int dadosNaoInformados = (int) arquivoCSV.obterQuantidadeLinhasValidas() - obterTotalInscritos();
+
+    relacaoIdade.put("Dados não informados", dadosNaoInformados);
+
+    return relacaoIdade;
+  }
+
+  public Map<String, Double> obterRelacaoIdadePercentual() {
+    Map<String, Integer> relacaoIdade = obterRelacaoIdade();
+    Map<String, Double> relacaoIdadePercentual = new TreeMap<>();
+
+    int total = obterTotalInscritos();
+
+    relacaoIdade.forEach((chave, valor) -> {
+      double valorPercentual = ((double) valor / total) * 100;
+      relacaoIdadePercentual.put(chave, valorPercentual);
+    });
+
+    return relacaoIdadePercentual;
+  }
+  
+  private void incrementarEm(Map<String, Integer> mapa, String chave) {
+    int valorAntigo = mapa.get(chave);
+    mapa.put(chave, valorAntigo + 1);
+  }
+
   public Map<String, Integer> obterNumeroInscritosPorGenero() {
     List<String> colunaInscritosPorGenero = arquivoCSV.obterColuna("TP_SEXO");
     Map<String, Integer> inscritosPorGenero = new TreeMap<>();
