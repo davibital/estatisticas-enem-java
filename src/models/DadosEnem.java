@@ -60,7 +60,7 @@ public abstract class DadosEnem {
         incrementarEm(relacaoIdade, "Maior de 60 anos");
     }
 
-    int dadosNaoInformados = (int) arquivoCSV.obterQuantidadeLinhasValidas() - obterTotalInscritos();
+    int dadosNaoInformados = obterTotalInscritos() - (int) arquivoCSV.obterQuantidadeLinhasValidas();
 
     relacaoIdade.put("Dados não informados", dadosNaoInformados);
 
@@ -108,7 +108,7 @@ public abstract class DadosEnem {
           return acc;
         });
 
-    int dadosNaoInformados = (int) arquivoCSV.obterQuantidadeLinhasValidas() - obterTotalInscritos();
+    int dadosNaoInformados = obterTotalInscritos() - (int) arquivoCSV.obterQuantidadeLinhasValidas();
 
     inscritosPorGenero.put("Masculino", Integer.parseInt(contagemMasculino));
     inscritosPorGenero.put("Feminino", Integer.parseInt(contagemFeminino));
