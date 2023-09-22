@@ -34,7 +34,7 @@ public abstract class DadosEnem {
     for (String codigo : colunaIdade) {
       int codigoNum = Integer.parseInt(codigo);
 
-      if (codigoNum < 1)
+      if (codigoNum == 1)
         incrementarEm(relacaoIdade, "Menor de 17 anos");
       else if (codigoNum <= 5)
         incrementarEm(relacaoIdade, "Entre 17 e 20 anos");
