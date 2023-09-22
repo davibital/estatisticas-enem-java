@@ -12,7 +12,7 @@ public class App extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        scene = new Scene(loadFXML("views/tela-inicial"), 640, 480);
+        scene = new Scene(loadFXML("views/tela_inicial"), 640, 480);
         stage.setScene(scene);
         
         stage.setTitle("Estatísticas ENEM");
