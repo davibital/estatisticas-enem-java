@@ -60,9 +60,7 @@ public abstract class DadosEnem {
         contagemNaoInformados++;
     }
 
-    int dadosNaoInformados = contagemNaoInformados + obterTotalInscritos() - (int) arquivoCSV.obterQuantidadeLinhasValidas();
-
-    relacaoIdade.put("Dados não informados", dadosNaoInformados);
+    relacaoIdade.put("Dados não informados", contagemNaoInformados);
 
     return relacaoIdade;
   }
@@ -103,11 +101,9 @@ public abstract class DadosEnem {
         contagemNaoInformados++;
     }
 
-    int dadosNaoInformados = contagemNaoInformados + obterTotalInscritos() - (int) arquivoCSV.obterQuantidadeLinhasValidas();
-
     inscritosPorGenero.put("Masculino", contagemMasculino);
     inscritosPorGenero.put("Feminino", contagemFeminino);
-    inscritosPorGenero.put("Dados não informados", dadosNaoInformados);
+    inscritosPorGenero.put("Dados não informados", contagemNaoInformados);
 
     return inscritosPorGenero;
   }
