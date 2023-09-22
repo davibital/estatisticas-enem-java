@@ -12,7 +12,7 @@ public class DadosEnemAntigo extends DadosEnem {
         throw new IllegalArgumentException("Ano inválido!");
 
       arquivoCSV = new ArquivoCSV("microdados-enem/antigo/");
-      String nomeArquivo = "MICRODADOS_ENEM_" + ano;
+      String nomeArquivo = "enem_" + ano;
       arquivoCSV.carregarArquivo(nomeArquivo);
 
       this.ano = "" + ano;
@@ -34,13 +34,16 @@ public class DadosEnemAntigo extends DadosEnem {
     Map<String, Integer> relacaoPresenca = new TreeMap<>();
     relacaoPresenca.put("Presentes", 0);
     relacaoPresenca.put("Ausentes", 0);
+    relacaoPresenca.put("Dados não informados", 0);
 
     for (String tipoPresenca : relacaoParticipantes) {
 
-      if (tipoPresenca.equals("1"))
+      if (tipoPresenca.equals("0"))
+        tipoPresenca = "Ausentes";
+      else if (tipoPresenca.equals("1"))
         tipoPresenca = "Presentes";
       else
-        tipoPresenca = "Ausentes";
+        tipoPresenca = "Dados não informados";
 
       int novoValor = relacaoPresenca.get(tipoPresenca) + 1;
 
@@ -56,6 +59,9 @@ public class DadosEnemAntigo extends DadosEnem {
     List<String> colunaUF = arquivoCSV.obterColuna("SG_UF_RESIDENCIA");
 
     for (String uf : colunaUF) {
+      if (uf.equals(""))
+        uf = "Dados não informados";
+      
       if (!relacao.containsKey(uf)) {
         relacao.put(uf, 1);
       } else {

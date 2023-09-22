@@ -65,7 +65,13 @@ public class ArquivoCSV {
 
       while (varredorArquivo.ready()) {
         List<String> linha = Arrays.asList(varredorArquivo.readLine().split(";"));
-        coluna.add(linha.get(indiceColuna));
+        String elementoColuna = "";
+        try {
+          elementoColuna = linha.get(indiceColuna);
+        } catch (Exception e) {
+          System.err.println("Elemento coluna vazio: " + elementoColuna);
+        }
+        coluna.add(elementoColuna);
       }
 
       varredorArquivo.close();

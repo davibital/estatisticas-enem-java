@@ -12,7 +12,7 @@ public class DadosEnemNovo extends DadosEnem {
         throw new IllegalArgumentException("Ano inválido!");
 
       arquivoCSV = new ArquivoCSV("microdados-enem/novo/");
-      String nomeArquivo = "MICRODADOS_ENEM_" + ano;
+      String nomeArquivo = "enem_" + ano;
       arquivoCSV.carregarArquivo(nomeArquivo);
       
       this.ano = "" + ano;
@@ -33,6 +33,9 @@ public class DadosEnemNovo extends DadosEnem {
     List<String> colunaUF = arquivoCSV.obterColuna("SG_UF_ESC");
 
     for (String uf : colunaUF) {
+      if (uf.equals("")) {
+        uf = "Dados não informados";
+      }
       if (!relacao.containsKey(uf)) {
         relacao.put(uf, 1);
       } else {
@@ -49,6 +52,7 @@ public class DadosEnemNovo extends DadosEnem {
     relacaoPresenca.put("Ausentes", 0);
     relacaoPresenca.put("Eliminados", 0);
     relacaoPresenca.put("Presentes", 0);
+    relacaoPresenca.put("Dados não informados", 0);
 
     for (String tipoPresenca : relacaoParticipantes) {
 
@@ -56,8 +60,10 @@ public class DadosEnemNovo extends DadosEnem {
         tipoPresenca = "Ausentes";
       else if (tipoPresenca.equals("1"))
         tipoPresenca = "Presentes";
-      else
+      else if (tipoPresenca.equals("2"))
         tipoPresenca = "Eliminados";
+      else
+        tipoPresenca = "Dados não informados";
 
       int novoValor = relacaoPresenca.get(tipoPresenca) + 1;
 
