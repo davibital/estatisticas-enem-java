@@ -1,6 +1,8 @@
 package models;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
@@ -21,24 +23,20 @@ public class ArquivoCSV {
   }
 
   public void carregarArquivo(String nomeArquivo) {
-    Scanner varredorArquivo = null;
-    Stream<String> streamLinhasArquivo = null;
+    BufferedReader varredorArquivo = null;
     arquivo = caminhoArquivo + nomeArquivo + ".csv";
 
     try {
-      varredorArquivo = new Scanner(new File(arquivo));
-      streamLinhasArquivo = Files.lines(new File(arquivo).toPath());
-      quantidadeLinhasValidas = streamLinhasArquivo.count() - 1;
+      varredorArquivo = new BufferedReader(new FileReader(arquivo));
+      String[] primeiraLinha = varredorArquivo.readLine().split(";");
 
-      String[] primeiraLinha = varredorArquivo.nextLine().split(";");
+      quantidadeLinhasValidas = varredorArquivo.lines().count();
 
       nomeColunasArquivo = Arrays.asList(primeiraLinha);
+      varredorArquivo.close();
     } catch (IOException e) {
       System.err.println("O arquivo não foi encontrado: " + arquivo);
       System.err.println("Informe o nome do arquivo corretamente!");
-    } finally {
-      varredorArquivo.close();
-      streamLinhasArquivo.close();
     }
   }
 
@@ -47,12 +45,12 @@ public class ArquivoCSV {
   }
   
   public List<String> obterColuna(String nomeColuna) {
-    Scanner varredorArquivo = null;
+    BufferedReader varredorArquivo = null;
     List<String> coluna = new ArrayList<>();
     int indiceColuna = -1;
 
     try {
-      varredorArquivo = new Scanner(new File(arquivo));
+      varredorArquivo = new BufferedReader(new FileReader(arquivo));
 
       for (int i = 0; i < nomeColunasArquivo.size(); i++) {
         if (nomeColunasArquivo.get(i).equals(nomeColuna))
@@ -63,13 +61,14 @@ public class ArquivoCSV {
         throw new IllegalArgumentException("Coluna não encontrada: " + nomeColuna);
 
       // Eliminar primeira linha do arquivo que consiste na linha de nomes das colunas
-      varredorArquivo.nextLine();
+      varredorArquivo.readLine();
 
-      while (varredorArquivo.hasNextLine()) {
-        String[] linha = varredorArquivo.nextLine().split(";");
-        coluna.add(linha[indiceColuna]);
+      while (varredorArquivo.ready()) {
+        List<String> linha = Arrays.asList(varredorArquivo.readLine().split(";"));
+        coluna.add(linha.get(indiceColuna));
       }
 
+      varredorArquivo.close();
     } catch (IOException e) {
       System.err.println("O arquivo não foi encontrado: " + arquivo);
       System.err.println("Carregue o arquivo correto novamente!");
@@ -77,8 +76,6 @@ public class ArquivoCSV {
       System.err.println(e.getMessage());
       System.err.println("Informe uma coluna que está presente no arquivo.");
       System.err.println("Colunas do arquivo: " + this.nomeColunasArquivo);
-    } finally {
-      varredorArquivo.close();
     }
 
     return coluna;
