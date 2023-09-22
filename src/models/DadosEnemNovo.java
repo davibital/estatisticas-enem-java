@@ -23,6 +23,11 @@ public class DadosEnemNovo extends DadosEnem {
   }
 
   @Override
+  public int obterTotalInscritos() {
+    return (int) arquivoCSV.obterQuantidadeLinhasValidas();
+  }
+
+  @Override
   public Map<String, Integer> obterRelacaoEstados() {
     Map<String, Integer> relacao = new TreeMap<>();
     List<String> colunaUF = arquivoCSV.obterColuna("SG_UF_ESC");

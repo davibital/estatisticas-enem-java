@@ -22,6 +22,13 @@ public class DadosEnemAntigo extends DadosEnem {
     }
   }
 
+  @Override
+  public int obterTotalInscritos() {
+    List<String> linhasTabela = arquivoCSV.obterColuna("NU_INSCRICAO");
+    // Retorna penúltima linha da tabela, que contém o maior número de inscrição
+    return Integer.parseInt(linhasTabela.get(linhasTabela.size() - 1));
+  }
+
   public Map<String, Integer> obterRelacaoPresenca() {
     List<String> relacaoParticipantes = arquivoCSV.obterColuna("TP_PRESENCA");
     Map<String, Integer> relacaoPresenca = new TreeMap<>();

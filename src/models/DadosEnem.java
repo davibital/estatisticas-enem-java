@@ -12,11 +12,7 @@ public abstract class DadosEnem {
 
   public abstract Map<String, Integer> obterRelacaoEstados();
 
-  public int obterTotalInscritos() {
-    List<String> linhasTabela = arquivoCSV.obterColuna("NU_INSCRICAO");
-    // Retorna penúltima linha da tabela, que contém o maior número de inscrição
-    return Integer.parseInt(linhasTabela.get(linhasTabela.size() - 1));
-  }
+  public abstract int obterTotalInscritos();
 
   public Map<String, Integer> obterRelacaoIdade() {
     List<String> colunaIdade = arquivoCSV.obterColuna("TP_FAIXA_ETARIA");
