@@ -73,13 +73,11 @@ public class FaixaEtariaController extends ControllerBase implements Initializab
     int anoPeriodoInicial;
     int anoPeriodoFinal;
     if (event.getSource().equals(menuItemEnemAntigo)) {
-      tituloTexto.setText("Enem Antigo");
       menuModeloEnem.setText(menuItemEnemAntigo.getText());
       anoPeriodoInicial = 1998;
       anoPeriodoFinal = 2008;
     }
     else {
-      tituloTexto.setText("Enem Novo");
       menuModeloEnem.setText(menuItemEnemNovo.getText());
       anoPeriodoInicial = 2009;
       anoPeriodoFinal = 2022;
