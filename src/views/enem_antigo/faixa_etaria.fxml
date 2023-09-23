@@ -23,7 +23,7 @@
          <top>
             <BorderPane maxHeight="50.0" minHeight="40.0" prefHeight="43.0" BorderPane.alignment="CENTER">
                <center>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Enem Antigo" textAlignment="CENTER" textOrigin="CENTER" BorderPane.alignment="CENTER">
+                  <Text fx:id="tituloTexto" strokeType="OUTSIDE" strokeWidth="0.0" text="Faixa Etária" textAlignment="CENTER" textOrigin="CENTER" BorderPane.alignment="CENTER">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -54,42 +54,15 @@
                <children>
                   <ToolBar prefHeight="27.0" prefWidth="600.0">
                      <items>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Informe o período a ser analisado:" />
-                        <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="12.0" />
-                        <MenuButton fx:id="menuPeriodoInicial" mnemonicParsing="false" text="Início">
+                        <MenuButton fx:id="menuModeloEnem" mnemonicParsing="false" text="Selecione o modelo do enem">
                           <items>
-                            <MenuItem mnemonicParsing="false" text="1998" />
-                            <MenuItem mnemonicParsing="false" text="1999" />
-                              <MenuItem mnemonicParsing="false" text="2000" />
-                              <MenuItem mnemonicParsing="false" text="2001" />
-                              <MenuItem mnemonicParsing="false" text="2002" />
-                              <MenuItem mnemonicParsing="false" text="2003" />
-                              <MenuItem mnemonicParsing="false" text="2004" />
-                              <MenuItem mnemonicParsing="false" text="2005" />
-                              <MenuItem mnemonicParsing="false" text="2006" />
-                              <MenuItem mnemonicParsing="false" text="2007" />
-                              <MenuItem mnemonicParsing="false" text="2008" />
+                            <MenuItem fx:id="menuItemEnemAntigo" mnemonicParsing="false" onAction="#iniciarAnalise" text="Modelo Antigo" />
+                            <MenuItem fx:id="menuItemEnemNovo" mnemonicParsing="false" onAction="#iniciarAnalise" text="Modelo Novo" />
                           </items>
-                        </MenuButton>
-                        <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="6.0" />
-                        <MenuButton fx:id="menuPeriodoFinal" layoutX="211.0" layoutY="10.0" mnemonicParsing="false" text="Fim">
-                           <items>
-                              <MenuItem mnemonicParsing="false" text="1998" />
-                              <MenuItem mnemonicParsing="false" text="1999" />
-                              <MenuItem mnemonicParsing="false" text="2000" />
-                              <MenuItem mnemonicParsing="false" text="2001" />
-                              <MenuItem mnemonicParsing="false" text="2002" />
-                              <MenuItem mnemonicParsing="false" text="2003" />
-                              <MenuItem mnemonicParsing="false" text="2004" />
-                              <MenuItem mnemonicParsing="false" text="2005" />
-                              <MenuItem mnemonicParsing="false" text="2006" />
-                              <MenuItem mnemonicParsing="false" text="2007" />
-                              <MenuItem mnemonicParsing="false" text="2008" />
-                           </items>
                         </MenuButton>
                      </items>
                   </ToolBar>
-                  <ToolBar prefHeight="27.0" prefWidth="600.0" GridPane.rowIndex="1">
+                  <ToolBar fx:id="barraAnalise" prefHeight="27.0" prefWidth="600.0" visible="false" GridPane.rowIndex="1">
                      <items>
                         <MenuButton fx:id="menuFaixaEtaria" mnemonicParsing="false" text="Selecione a faixa etária">
                           <items>
@@ -107,12 +80,18 @@
                           </items>
                         </MenuButton>
                         <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="12.0" />
-                        <Button fx:id="botaoPlotar" mnemonicParsing="false" onAction="#plotarGrafico" text="Plotar" textAlignment="CENTER" textOverrun="CENTER_WORD_ELLIPSIS" />
+                        <Text disable="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Período:" textAlignment="CENTER" />
+                        <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="6.0" />
+                        <MenuButton fx:id="menuPeriodoInicial" mnemonicParsing="false" text="Início" />
+                        <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="6.0" />
+                        <MenuButton fx:id="menuPeriodoFinal" mnemonicParsing="false" text="Fim" />
+                        <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="6.0" />
+                        <Button fx:id="botaoPlotar" mnemonicParsing="false" onAction="#plotarGrafico" text="Plotar gráfico" textAlignment="CENTER" textOverrun="CENTER_WORD_ELLIPSIS" />
                         <Separator layoutX="167.0" layoutY="10.0" orientation="VERTICAL" prefHeight="0.0" prefWidth="12.0" />
                         <Button fx:id="botaoLimparGrafico" mnemonicParsing="false" onAction="#limparGrafico" text="Limpar gráfico" textAlignment="CENTER" />
                      </items>
                   </ToolBar>
-                  <LineChart fx:id="graficoFaixaEtaria" title="Inscritos da faixa etária por ano" GridPane.rowIndex="2">
+                  <LineChart fx:id="graficoFaixaEtaria" title="Inscritos da faixa etária por ano" visible="false" GridPane.rowIndex="2">
                     <xAxis>
                       <CategoryAxis label="ANO" side="BOTTOM" />
                     </xAxis>
