@@ -13,19 +13,25 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.ToolBar;
+import javafx.scene.text.Text;
 import models.DadosEnemAntigo;
 import models.DadosEnemNovo;
 
 public class FaixaEtariaController extends ControllerBase implements Initializable {
 
   @FXML
+  private ToolBar barraAnalise;
+
+  @FXML
   private Button botaoInicio;
 
   @FXML
-  private Button botaoPlotar;
+  private Button botaoLimparGrafico;
 
   @FXML
-  private Button botaoLimparGrafico;
+  private Button botaoPlotar;
 
   @FXML
   private LineChart graficoFaixaEtaria;
@@ -34,10 +40,76 @@ public class FaixaEtariaController extends ControllerBase implements Initializab
   private MenuButton menuFaixaEtaria;
 
   @FXML
+  private MenuItem menuItemEnemAntigo;
+
+  @FXML
+  private MenuItem menuItemEnemNovo;
+
+  @FXML
+  private MenuButton menuModeloEnem;
+
+  @FXML
   private MenuButton menuPeriodoFinal;
 
   @FXML
   private MenuButton menuPeriodoInicial;
+
+  @FXML
+  private Text tituloTexto;
+
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {
+    configurarMenu(menuFaixaEtaria);
+  }
+
+  @FXML
+  void voltarAoInicio(ActionEvent event) throws IOException {
+    localizacaoArquivo = "../views/";
+    setStage(loadFXML(localizacaoArquivo, "tela_inicial"), event);
+  }
+  
+  @FXML
+  void iniciarAnalise(ActionEvent event) {
+    int anoPeriodoInicial;
+    int anoPeriodoFinal;
+    if (event.getSource().equals(menuItemEnemAntigo)) {
+      tituloTexto.setText("Enem Antigo");
+      menuModeloEnem.setText(menuItemEnemAntigo.getText());
+      anoPeriodoInicial = 1998;
+      anoPeriodoFinal = 2008;
+    }
+    else {
+      tituloTexto.setText("Enem Novo");
+      menuModeloEnem.setText(menuItemEnemNovo.getText());
+      anoPeriodoInicial = 2009;
+      anoPeriodoFinal = 2022;
+    }
+    
+    menuPeriodoInicial.getItems().clear();
+    menuPeriodoInicial.setText("Início");
+    menuPeriodoFinal.getItems().clear();
+    menuPeriodoFinal.setText("Fim");
+
+    for (int ano = anoPeriodoInicial; ano <= anoPeriodoFinal; ano++) {
+      MenuItem itemAnoInicial = new MenuItem("" + ano);
+      MenuItem itemAnoFinal = new MenuItem("" + ano);
+      menuPeriodoInicial.getItems().add(itemAnoInicial);
+      menuPeriodoFinal.getItems().add(itemAnoFinal);
+    }
+
+    barraAnalise.setVisible(true);
+    graficoFaixaEtaria.setVisible(true);
+
+    configurarMenu(menuPeriodoInicial);
+    configurarMenu(menuPeriodoFinal);
+  }
+
+  @FXML
+  void limparGrafico(ActionEvent event) {
+    graficoFaixaEtaria.getData().clear();
+    menuPeriodoInicial.setDisable(false);
+    menuPeriodoFinal.setDisable(false);
+  }
 
   @FXML
   void plotarGrafico(ActionEvent event) {
@@ -64,13 +136,22 @@ public class FaixaEtariaController extends ControllerBase implements Initializab
       return;
     }
 
+    menuPeriodoInicial.setDisable(true);
+    menuPeriodoFinal.setDisable(true);
+
     XYChart.Series series = new XYChart.Series();
     series.setName(faixaEtaria);
 
-    if (periodoInicial > periodoFinal) {
+    try {
+      int diferencaPeriodo = periodoInicial - periodoFinal;
+      if (diferencaPeriodo < 0)
+        throw new Exception("O período inicial não pode ser maior que o período final");
+      else if (diferencaPeriodo == 0)
+        throw new Exception("A diferença entre os períodos deve ser de pelo menos 1 ano");
+    } catch (Exception e) {
       Alert alerta = new Alert(Alert.AlertType.ERROR);
       alerta.setTitle("Erro!");
-      alerta.setContentText("O período inicial não pode ser maior que o período final");
+      alerta.setContentText(e.getMessage());
       alerta.showAndWait();
       return;
     }
@@ -81,29 +162,11 @@ public class FaixaEtariaController extends ControllerBase implements Initializab
         dado = new DadosEnemAntigo(ano).obterRelacaoIdade().get(faixaEtaria);
       else
         dado = new DadosEnemNovo(ano).obterRelacaoIdade().get(faixaEtaria);
-        
+
       series.getData().add(new XYChart.Data("" + ano, dado));
     }
 
     graficoFaixaEtaria.getData().add(series);
-  }
-
-  @FXML
-  void limparGrafico(ActionEvent event) {
-    graficoFaixaEtaria.getData().clear();
-  }
-
-  @FXML
-    void voltarAoInicio(ActionEvent event) throws IOException {
-      localizacaoArquivo = "../views/";
-      setStage(loadFXML(localizacaoArquivo, "tela_inicial"), event);
-    }
-
-  @Override
-  public void initialize(URL location, ResourceBundle resources) {
-    configurarMenu(menuFaixaEtaria);
-    configurarMenu(menuPeriodoInicial);
-    configurarMenu(menuPeriodoFinal);
   }
 
   private void configurarMenu(MenuButton menu) {
