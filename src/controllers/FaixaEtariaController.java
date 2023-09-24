@@ -134,14 +134,11 @@ public class FaixaEtariaController extends ControllerBase implements Initializab
       return;
     }
 
-    menuPeriodoInicial.setDisable(true);
-    menuPeriodoFinal.setDisable(true);
-
     XYChart.Series series = new XYChart.Series();
     series.setName(faixaEtaria);
 
     try {
-      int diferencaPeriodo = periodoInicial - periodoFinal;
+      int diferencaPeriodo = periodoFinal - periodoInicial;
       if (diferencaPeriodo < 0)
         throw new Exception("O período inicial não pode ser maior que o período final");
       else if (diferencaPeriodo == 0)
@@ -153,6 +150,9 @@ public class FaixaEtariaController extends ControllerBase implements Initializab
       alerta.showAndWait();
       return;
     }
+
+    menuPeriodoInicial.setDisable(true);
+    menuPeriodoFinal.setDisable(true);
 
     for (int ano = periodoInicial; ano <= periodoFinal; ano++) {
       int dado = 0;
