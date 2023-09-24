@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane minHeight="350.0" minWidth="550.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FaixaEtariaController">
+   <children>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <BorderPane maxHeight="50.0" minHeight="40.0" prefHeight="43.0" BorderPane.alignment="CENTER">
+               <center>
+                  <Text fx:id="tituloTexto" strokeType="OUTSIDE" strokeWidth="0.0" text="Faixa Etária" textAlignment="CENTER" textOrigin="CENTER" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <BorderPane.margin>
+                        <Insets right="120.0" />
+                     </BorderPane.margin>
+                  </Text>
+               </center>
+               <left>
+                  <Button fx:id="botaoInicio" alignment="CENTER" mnemonicParsing="false" onAction="#voltarAoInicio" text="Voltar ao início" BorderPane.alignment="CENTER">
+                     <BorderPane.margin>
+                        <Insets left="10.0" />
+                     </BorderPane.margin>
+                  </Button>
+               </left>
+            </BorderPane>
+         </top>
+         <center>
+            <GridPane BorderPane.alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="40.0" minHeight="25.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="40.0" minHeight="25.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="250.0" prefHeight="275.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <ToolBar prefHeight="27.0" prefWidth="600.0">
+                     <items>
+                        <MenuButton fx:id="menuModeloEnem" mnemonicParsing="false" text="Selecione o modelo do enem">
+                          <items>
+                            <MenuItem fx:id="menuItemEnemAntigo" mnemonicParsing="false" onAction="#iniciarAnalise" text="Modelo Antigo" />
+                            <MenuItem fx:id="menuItemEnemNovo" mnemonicParsing="false" onAction="#iniciarAnalise" text="Modelo Novo" />
+                          </items>
+                        </MenuButton>
+                     </items>
+                  </ToolBar>
+                  <ToolBar fx:id="barraAnalise" prefHeight="27.0" prefWidth="600.0" visible="false" GridPane.rowIndex="1">
+                     <items>
+                        <MenuButton fx:id="menuFaixaEtaria" mnemonicParsing="false" text="Selecione a faixa etária">
+                          <items>
+                            <MenuItem mnemonicParsing="false" text="Menor de 17 anos" />
+                            <MenuItem mnemonicParsing="false" text="Entre 17 e 20 anos" />
+                              <MenuItem mnemonicParsing="false" text="Entre 21 e 25 anos" />
+                              <MenuItem mnemonicParsing="false" text="Entre 26 e 30 anos" />
+                              <MenuItem mnemonicParsing="false" text="Entre 31 e 35 anos" />
+                              <MenuItem mnemonicParsing="false" text="Entre 36 e 40 anos" />
+                              <MenuItem mnemonicParsing="false" text="Entre 41 e 45 anos" />
+                              <MenuItem mnemonicParsing="false" text="Entre 46 e 50 anos" />
+                              <MenuItem mnemonicParsing="false" text="Entre 51 e 55 anos" />
+                              <MenuItem mnemonicParsing="false" text="Entre 56 e 60 anos" />
+                              <MenuItem mnemonicParsing="false" text="Maior de 60 anos" />
+                          </items>
+                        </MenuButton>
+                        <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="12.0" />
+                        <Text disable="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Período:" textAlignment="CENTER" />
+                        <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="6.0" />
+                        <MenuButton fx:id="menuPeriodoInicial" mnemonicParsing="false" text="Início" />
+                        <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="6.0" />
+                        <MenuButton fx:id="menuPeriodoFinal" mnemonicParsing="false" text="Fim" />
+                        <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="6.0" />
+                        <Button fx:id="botaoPlotar" mnemonicParsing="false" onAction="#plotarGrafico" text="Plotar gráfico" textAlignment="CENTER" textOverrun="CENTER_WORD_ELLIPSIS" />
+                        <Separator layoutX="167.0" layoutY="10.0" orientation="VERTICAL" prefHeight="0.0" prefWidth="12.0" />
+                        <Button fx:id="botaoLimparGrafico" mnemonicParsing="false" onAction="#limparGrafico" text="Limpar gráfico" textAlignment="CENTER" />
+                     </items>
+                  </ToolBar>
+                  <LineChart fx:id="graficoFaixaEtaria" title="Inscritos da faixa etária por ano" visible="false" GridPane.rowIndex="2">
+                    <xAxis>
+                      <CategoryAxis label="ANO" side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis label="QUANTIDADE DE INSCRITOS" side="LEFT" />
+                    </yAxis>
+                  </LineChart>
+               </children>
+            </GridPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
