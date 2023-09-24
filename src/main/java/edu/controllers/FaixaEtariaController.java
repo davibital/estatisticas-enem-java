@@ -70,6 +70,7 @@ public class FaixaEtariaController extends ControllerBase implements Initializab
   
   @FXML
   void iniciarAnalise(ActionEvent event) {
+    limparGrafico(event);
     int anoPeriodoInicial;
     int anoPeriodoFinal;
     if (event.getSource().equals(menuItemEnemAntigo)) {

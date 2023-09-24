@@ -1,8 +1,8 @@
-/home/davi_dev/development/estudos/ufs/poo/projeto-final/gui-estatisticas-enem-java/gui-estatisticas-enem-java/src/main/java/edu/controllers/ControllerBase.java
-/home/davi_dev/development/estudos/ufs/poo/projeto-final/gui-estatisticas-enem-java/gui-estatisticas-enem-java/src/main/java/edu/controllers/TelaInicialController.java
-/home/davi_dev/development/estudos/ufs/poo/projeto-final/gui-estatisticas-enem-java/gui-estatisticas-enem-java/src/main/java/edu/models/DadosEnem.java
-/home/davi_dev/development/estudos/ufs/poo/projeto-final/gui-estatisticas-enem-java/gui-estatisticas-enem-java/src/main/java/edu/controllers/FaixaEtariaController.java
-/home/davi_dev/development/estudos/ufs/poo/projeto-final/gui-estatisticas-enem-java/gui-estatisticas-enem-java/src/main/java/edu/models/ArquivoCSV.java
-/home/davi_dev/development/estudos/ufs/poo/projeto-final/gui-estatisticas-enem-java/gui-estatisticas-enem-java/src/main/java/edu/models/DadosEnemNovo.java
-/home/davi_dev/development/estudos/ufs/poo/projeto-final/gui-estatisticas-enem-java/gui-estatisticas-enem-java/src/main/java/edu/models/DadosEnemAntigo.java
-/home/davi_dev/development/estudos/ufs/poo/projeto-final/gui-estatisticas-enem-java/gui-estatisticas-enem-java/src/main/java/edu/App.java
+/home/davi_dev/development/estudos/ufs/poo/projeto-final/estatisticas-enem-java/src/main/java/edu/models/DadosEnemNovo.java
+/home/davi_dev/development/estudos/ufs/poo/projeto-final/estatisticas-enem-java/src/main/java/edu/App.java
+/home/davi_dev/development/estudos/ufs/poo/projeto-final/estatisticas-enem-java/src/main/java/edu/models/ArquivoCSV.java
+/home/davi_dev/development/estudos/ufs/poo/projeto-final/estatisticas-enem-java/src/main/java/edu/models/DadosEnemAntigo.java
+/home/davi_dev/development/estudos/ufs/poo/projeto-final/estatisticas-enem-java/src/main/java/edu/controllers/ControllerBase.java
+/home/davi_dev/development/estudos/ufs/poo/projeto-final/estatisticas-enem-java/src/main/java/edu/controllers/FaixaEtariaController.java
+/home/davi_dev/development/estudos/ufs/poo/projeto-final/estatisticas-enem-java/src/main/java/edu/controllers/TelaInicialController.java
+/home/davi_dev/development/estudos/ufs/poo/projeto-final/estatisticas-enem-java/src/main/java/edu/models/DadosEnem.java
