@@ -59,9 +59,6 @@ public class DadosEnemAntigo extends DadosEnem {
     List<String> colunaUF = arquivoCSV.obterColuna("SG_UF_RESIDENCIA");
 
     for (String uf : colunaUF) {
-      if (uf.equals(""))
-        uf = "Dados não informados";
-      
       if (!relacao.containsKey(uf)) {
         relacao.put(uf, 1);
       } else {
