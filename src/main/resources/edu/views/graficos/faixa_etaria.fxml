@@ -23,7 +23,7 @@
          <top>
             <BorderPane maxHeight="50.0" minHeight="40.0" prefHeight="43.0" BorderPane.alignment="CENTER">
                <center>
-                  <Text fx:id="tituloTexto" strokeType="OUTSIDE" strokeWidth="0.0" text="Faixa Etária" textAlignment="CENTER" textOrigin="CENTER" BorderPane.alignment="CENTER">
+                  <Text fx:id="tituloTexto" strokeType="OUTSIDE" strokeWidth="0.0" text="FAIXA ETÁRIA POR ANO" textAlignment="CENTER" textOrigin="CENTER" BorderPane.alignment="CENTER">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -91,9 +91,9 @@
                         <Button fx:id="botaoLimparGrafico" mnemonicParsing="false" onAction="#limparGrafico" text="Limpar gráfico" textAlignment="CENTER" />
                      </items>
                   </ToolBar>
-                  <LineChart fx:id="graficoFaixaEtaria" title="Inscritos da faixa etária por ano" visible="false" GridPane.rowIndex="2">
+                  <LineChart fx:id="graficoFaixaEtaria" title="Faixa etária dos inscritos por ano" visible="false" GridPane.rowIndex="2">
                     <xAxis>
-                      <CategoryAxis label="ANO" side="BOTTOM" />
+                      <CategoryAxis animated="false" label="ANO" side="BOTTOM" />
                     </xAxis>
                     <yAxis>
                       <NumberAxis label="QUANTIDADE DE INSCRITOS" side="LEFT" />

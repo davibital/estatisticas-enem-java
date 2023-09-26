@@ -25,7 +25,7 @@
                <children>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Selecione a variável a ser analisada:" textAlignment="CENTER" BorderPane.alignment="CENTER">
+                        <Text fill="#005ca8" strokeType="OUTSIDE" strokeWidth="0.0" text="Selecione a variável a ser analisada:" textAlignment="CENTER" BorderPane.alignment="CENTER">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -46,37 +46,37 @@
                      <children>
                         <BorderPane prefHeight="200.0" prefWidth="200.0">
                            <center>
-                              <Button fx:id="botaoInscritos" mnemonicParsing="false" onAction="#analisarTotalInscritos" text="Total de inscritos" BorderPane.alignment="CENTER" />
+                              <Button fx:id="botaoInscritos" mnemonicParsing="false" onAction="#analisarTotalInscritos" text="TOTAL DE INSCRITOS" textAlignment="JUSTIFY" BorderPane.alignment="CENTER" />
                            </center>
                         </BorderPane>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                            <center>
-                              <Button fx:id="botaoMediaProvaObjetiva" mnemonicParsing="false" onAction="#analisarMediaProvaObjetiva" text="Média das provas objetivas" BorderPane.alignment="CENTER" />
+                              <Button fx:id="botaoMediaProvaObjetiva" mnemonicParsing="false" onAction="#analisarMediaProvaObjetiva" text="MÉDIA DAS PROVAS OBJETIVAS" textAlignment="JUSTIFY" BorderPane.alignment="CENTER" />
                            </center>
                         </BorderPane>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
                            <center>
-                              <Button fx:id="botaoInscritosUF" mnemonicParsing="false" onAction="#analisarInscritosUF" text="Inscritos por UF" BorderPane.alignment="CENTER" />
+                              <Button fx:id="botaoInscritosUF" mnemonicParsing="false" onAction="#analisarInscritosUF" text="INSCRITOS POR UF " textAlignment="JUSTIFY" BorderPane.alignment="CENTER" />
                            </center>
                         </BorderPane>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <center>
-                              <Button fx:id="botaoMediaRedacao" mnemonicParsing="false" onAction="#analisarMediaRedacao" text="Média das redações" BorderPane.alignment="CENTER" />
+                              <Button fx:id="botaoMediaRedacao" mnemonicParsing="false" onAction="#analisarMediaRedacao" text="MÉDIA DAS REDAÇÕES " textAlignment="JUSTIFY" BorderPane.alignment="CENTER" />
                            </center>
                         </BorderPane>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <center>
-                              <Button fx:id="botaoPresenca" mnemonicParsing="false" onAction="#analisarPresenca" text="Presença" BorderPane.alignment="CENTER" />
+                              <Button fx:id="botaoPresenca" mnemonicParsing="false" onAction="#analisarPresenca" text="PERCENTUAL DE PRESENTES" textAlignment="JUSTIFY" BorderPane.alignment="CENTER" />
                            </center>
                         </BorderPane>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                            <center>
-                              <Button fx:id="botaoFaixaEtaria" mnemonicParsing="false" onAction="#analisarFaixaEtaria" text="Faixa etária" BorderPane.alignment="CENTER" />
+                              <Button fx:id="botaoFaixaEtaria" mnemonicParsing="false" onAction="#analisarFaixaEtaria" text="FAIXA ETÁRIA" textAlignment="JUSTIFY" BorderPane.alignment="CENTER" />
                            </center>
                         </BorderPane>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
                            <center>
-                              <Button fx:id="botaoGeneroInscritos" mnemonicParsing="false" onAction="#analisarGeneroInscritos" text="Gênero dos inscritos" BorderPane.alignment="CENTER" />
+                              <Button fx:id="botaoGeneroInscritos" mnemonicParsing="false" onAction="#analisarGeneroInscritos" text="GÊNERO DOS INSCRITOS" textAlignment="JUSTIFY" BorderPane.alignment="CENTER" />
                            </center>
                         </BorderPane>
                      </children>
@@ -87,9 +87,9 @@
          <top>
             <BorderPane maxHeight="50.0" minHeight="40.0" prefHeight="43.0" BorderPane.alignment="CENTER">
                <center>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Estatísticas do Enem" textAlignment="CENTER" textOrigin="CENTER" BorderPane.alignment="CENTER">
+                  <Text fill="#005ca8" strokeType="OUTSIDE" strokeWidth="0.0" text="Estatísticas do ENEM" textAlignment="CENTER" textOrigin="CENTER" underline="true" BorderPane.alignment="CENTER">
                      <font>
-                        <Font size="18.0" />
+                        <Font size="24.0" />
                      </font>
                      <BorderPane.margin>
                         <Insets />
