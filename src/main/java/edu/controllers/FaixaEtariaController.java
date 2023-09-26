@@ -34,7 +34,7 @@ public class FaixaEtariaController extends ControllerBase implements Initializab
   private Button botaoPlotar;
 
   @FXML
-  private LineChart graficoFaixaEtaria;
+  private LineChart<String, Number> graficoFaixaEtaria;
 
   @FXML
   private MenuButton menuFaixaEtaria;
@@ -108,6 +108,7 @@ public class FaixaEtariaController extends ControllerBase implements Initializab
     graficoFaixaEtaria.getData().clear();
     menuPeriodoInicial.setDisable(false);
     menuPeriodoFinal.setDisable(false);
+    menuFaixaEtaria.getItems().forEach(item -> item.setDisable(false));
   }
 
   @FXML
@@ -119,7 +120,9 @@ public class FaixaEtariaController extends ControllerBase implements Initializab
       periodoInicial = Integer.parseInt(menuPeriodoInicial.getText());
       periodoFinal = Integer.parseInt(menuPeriodoFinal.getText());
       faixaEtaria = menuFaixaEtaria.getText();
-      if (faixaEtaria.equals("Selecione a faixa etária"))
+      if (itemEstaDesabilitado(faixaEtaria))
+        throw new IOException("A faixa etária já foi selecionada!");
+      else if (faixaEtaria.equals("Selecione a faixa etária"))
         throw new IOException("É preciso selecionar a faixa etária!");
     } catch (IOException e) {
       Alert alerta = new Alert(Alert.AlertType.ERROR);
@@ -135,7 +138,7 @@ public class FaixaEtariaController extends ControllerBase implements Initializab
       return;
     }
 
-    XYChart.Series series = new XYChart.Series();
+    XYChart.Series<String, Number> series = new XYChart.Series<>();
     series.setName(faixaEtaria);
 
     try {
@@ -154,6 +157,10 @@ public class FaixaEtariaController extends ControllerBase implements Initializab
 
     menuPeriodoInicial.setDisable(true);
     menuPeriodoFinal.setDisable(true);
+    menuFaixaEtaria.getItems().forEach(item -> {
+      if (item.getText().equals(faixaEtaria))
+        item.setDisable(true);
+    });
 
     for (int ano = periodoInicial; ano <= periodoFinal; ano++) {
       int dado = 0;
@@ -164,8 +171,21 @@ public class FaixaEtariaController extends ControllerBase implements Initializab
 
       series.getData().add(new XYChart.Data("" + ano, dado));
     }
-
     graficoFaixaEtaria.getData().add(series);
+  }
+
+  private boolean itemEstaDesabilitado(String nomeItem) {
+    boolean estaDesabilitado = false;
+    MenuItem itemDoMenu = menuFaixaEtaria.getItems().stream().reduce(menuItemEnemAntigo, (itemAntigo, item) -> {
+      if (item.getText().equals(nomeItem))
+        itemAntigo = item;
+      return itemAntigo;
+    });
+
+    if (itemDoMenu.isDisable())
+      estaDesabilitado = true;
+
+    return estaDesabilitado;
   }
 
   private void configurarMenu(MenuButton menu) {
