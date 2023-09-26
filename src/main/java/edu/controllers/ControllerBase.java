@@ -16,9 +16,11 @@ public abstract class ControllerBase {
   protected String localizacaoArquivo;
 
   protected void setStage(Parent root, ActionEvent event) throws IOException {
-    scene = new Scene(root, 700, 480);
+    scene = new Scene(root, 700, 450);
     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
     stage.setScene(scene);
+    stage.setMinWidth(640);
+    stage.setMinWidth(400);
     stage.show();
   }
 
