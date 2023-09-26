@@ -120,7 +120,7 @@ public class FaixaEtariaController extends ControllerBase implements Initializab
       else
         dado = new DadosEnemNovo(ano).obterRelacaoIdade().get(faixaEtaria);
 
-      series.getData().add(new XYChart.Data("" + ano, dado));
+      series.getData().add(new XYChart.Data<>("" + ano, dado));
     }
 
     graficoFaixaEtaria.getData().add(series);
