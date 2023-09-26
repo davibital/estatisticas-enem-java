@@ -187,18 +187,4 @@ public class FaixaEtariaController extends ControllerBase implements Initializab
 
     return estaDesabilitado;
   }
-
-  private void configurarMenu(MenuButton menu) {
-    menu.getItems()
-        .stream()
-        .forEach(item -> 
-          item.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent arg0) {
-              menu.setText(item.getText());
-            }
-          })
-        );
-  }
 }
