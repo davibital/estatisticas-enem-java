@@ -1,6 +1,5 @@
 package edu.controllers;
 
-import java.io.IOError;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
@@ -12,12 +11,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ToolBar;
-import javafx.scene.control.Alert.AlertType;
 
 public class GeneroController extends ControllerBase {
 
@@ -71,35 +68,10 @@ public class GeneroController extends ControllerBase {
 
   @FXML
   void plotarGrafico(ActionEvent event) {
-    Integer periodoInicial;
-    Integer periodoFinal;
-    try {
-      periodoInicial = Integer.parseInt(menuPeriodoInicial.getText());
-      periodoFinal = Integer.parseInt(menuPeriodoFinal.getText());
-    } catch (NumberFormatException e) {
-      Alert alerta = new Alert(Alert.AlertType.ERROR);
-      alerta.setTitle("Erro!");
-      alerta.setContentText("É necessário informar o período a ser analisado!");
-      alerta.showAndWait();
+    Integer periodoInicial = null;
+    Integer periodoFinal = null;
+    if (!periodoValido(periodoInicial, periodoFinal))
       return;
-    }
-
-    try {
-      int diferencaPeriodo = periodoFinal - periodoInicial;
-      if (diferencaPeriodo < 0)
-        throw new Exception("O período inicial não pode ser maior que o período final");
-      else if (diferencaPeriodo == 0)
-        throw new Exception("A diferença entre os períodos deve ser de pelo menos 1 ano");
-    } catch (Exception e) {
-      Alert alerta = new Alert(Alert.AlertType.ERROR);
-      alerta.setTitle("Erro!");
-      alerta.setContentText(e.getMessage());
-      alerta.showAndWait();
-      return;
-    }
-
-    menuPeriodoInicial.setDisable(true);
-    menuPeriodoFinal.setDisable(true);
 
     Set<String> categorias = new DadosEnemAntigo(1998).obterNumeroInscritosPorGenero().keySet();
     Map<String, XYChart.Series<String, Number>> seriesMap = new TreeMap<>();
@@ -125,6 +97,7 @@ public class GeneroController extends ControllerBase {
     }
 
     seriesMap.forEach((nomeSerie, serie) -> graficoGenero.getData().add(serie));
+    botaoPlotar.setDisable(true);
   }
 
 }
