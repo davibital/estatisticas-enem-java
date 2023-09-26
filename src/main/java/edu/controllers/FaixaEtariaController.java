@@ -64,8 +64,8 @@ public class FaixaEtariaController extends ControllerBase implements Initializab
 
   @FXML
   void plotarGrafico(ActionEvent event) {
-    Integer periodoInicial;
-    Integer periodoFinal;
+    Integer periodoInicial = null;
+    Integer periodoFinal = null;
     String faixaEtaria;
     try {
       periodoInicial = Integer.parseInt(menuPeriodoInicial.getText());
@@ -89,19 +89,8 @@ public class FaixaEtariaController extends ControllerBase implements Initializab
       return;
     }
 
-    try {
-      int diferencaPeriodo = periodoFinal - periodoInicial;
-      if (diferencaPeriodo < 0)
-        throw new Exception("O período inicial não pode ser maior que o período final");
-      else if (diferencaPeriodo == 0)
-        throw new Exception("A diferença entre os períodos deve ser de pelo menos 1 ano");
-    } catch (Exception e) {
-      Alert alerta = new Alert(Alert.AlertType.ERROR);
-      alerta.setTitle("Erro!");
-      alerta.setContentText(e.getMessage());
-      alerta.showAndWait();
+    if (!periodoValido(periodoInicial, periodoFinal))
       return;
-    }
 
     XYChart.Series<String, Number> series = new XYChart.Series<>();
     series.setName(faixaEtaria);
