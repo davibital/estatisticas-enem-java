@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ToolBar;
@@ -91,6 +92,26 @@ public abstract class ControllerBase {
 
     configurarMenu(menuPeriodoInicial);
     configurarMenu(menuPeriodoFinal);
+  }
+
+  protected boolean periodoValido(Integer periodoInicial, Integer periodoFinal) {
+    try {
+      int diferencaPeriodo = periodoFinal - periodoInicial;
+      if (diferencaPeriodo < 0)
+        throw new Exception("O período inicial não pode ser maior que o período final");
+      else if (diferencaPeriodo == 0)
+        throw new Exception("A diferença entre os períodos deve ser de pelo menos 1 ano");
+    } catch (Exception e) {
+      Alert alerta = new Alert(Alert.AlertType.ERROR);
+      alerta.setTitle("Erro!");
+      alerta.setContentText(e.getMessage());
+      alerta.showAndWait();
+      return false;
+    }
+
+    menuPeriodoInicial.setDisable(true);
+    menuPeriodoFinal.setDisable(true);
+    return true;
   }
   
   protected boolean itemEstaDesabilitado(String nomeItem, MenuButton menu) {
