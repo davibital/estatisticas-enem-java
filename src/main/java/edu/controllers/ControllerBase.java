@@ -4,14 +4,39 @@ import java.io.IOException;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.ToolBar;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public abstract class ControllerBase {
+
+  @FXML
+  private ToolBar barraAnalise;
+
+  @FXML
+  private MenuItem menuItemEnemAntigo;
+
+  @FXML
+  private MenuItem menuItemEnemNovo;
+
+  @FXML
+  private MenuButton menuModeloEnem;
+
+  @FXML
+  private MenuButton menuPeriodoFinal;
+
+  @FXML
+  private MenuButton menuPeriodoInicial;
+
+  @FXML
+  private BorderPane painelGrafico;
 
   private Stage stage;
   private static Scene scene;
@@ -29,6 +54,57 @@ public abstract class ControllerBase {
   protected static Parent loadFXML(String localizacaoArquivo, String fxml) throws IOException {
     FXMLLoader fxmlLoader = new FXMLLoader(ControllerBase.class.getResource(localizacaoArquivo + fxml + ".fxml"));
     return fxmlLoader.load();
+  }
+
+  protected void voltarAoInicioBase(ActionEvent event) throws IOException {
+    localizacaoArquivo = "../views/";
+    setStage(loadFXML(localizacaoArquivo, "tela_inicial"), event);
+  }
+
+  protected void iniciarAnaliseBase(ActionEvent event) {
+    int anoPeriodoInicial;
+    int anoPeriodoFinal;
+    if (event.getSource().equals(menuItemEnemAntigo)) {
+      menuModeloEnem.setText(menuItemEnemAntigo.getText());
+      anoPeriodoInicial = 1998;
+      anoPeriodoFinal = 2008;
+    } else {
+      menuModeloEnem.setText(menuItemEnemNovo.getText());
+      anoPeriodoInicial = 2009;
+      anoPeriodoFinal = 2022;
+    }
+
+    menuPeriodoInicial.getItems().clear();
+    menuPeriodoInicial.setText("Início");
+    menuPeriodoFinal.getItems().clear();
+    menuPeriodoFinal.setText("Fim");
+
+    for (int ano = anoPeriodoInicial; ano <= anoPeriodoFinal; ano++) {
+      MenuItem itemAnoInicial = new MenuItem("" + ano);
+      MenuItem itemAnoFinal = new MenuItem("" + ano);
+      menuPeriodoInicial.getItems().add(itemAnoInicial);
+      menuPeriodoFinal.getItems().add(itemAnoFinal);
+    }
+
+    barraAnalise.setVisible(true);
+    painelGrafico.setVisible(true);
+
+    configurarMenu(menuPeriodoInicial);
+    configurarMenu(menuPeriodoFinal);
+  }
+  
+  protected boolean itemEstaDesabilitado(String nomeItem, MenuButton menu) {
+    boolean estaDesabilitado = false;
+    MenuItem itemDoMenu = menu.getItems().stream().reduce(new MenuItem(), (itemAntigo, item) -> {
+      if (item.getText().equals(nomeItem))
+        itemAntigo = item;
+      return itemAntigo;
+    });
+
+    if (itemDoMenu.isDisable())
+      estaDesabilitado = true;
+
+    return estaDesabilitado;
   }
 
   protected void configurarMenu(MenuButton menu) {

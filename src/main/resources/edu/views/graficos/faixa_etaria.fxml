@@ -91,14 +91,18 @@
                         <Button fx:id="botaoLimparGrafico" mnemonicParsing="false" onAction="#limparGrafico" text="Limpar gráfico" textAlignment="CENTER" />
                      </items>
                   </ToolBar>
-                  <LineChart fx:id="graficoFaixaEtaria" title="Faixa etária dos inscritos por ano" visible="false" GridPane.rowIndex="2">
-                    <xAxis>
-                      <CategoryAxis animated="false" label="ANO" side="BOTTOM" />
-                    </xAxis>
-                    <yAxis>
-                      <NumberAxis label="QUANTIDADE DE INSCRITOS" side="LEFT" />
-                    </yAxis>
-                  </LineChart>
+                  <BorderPane fx:id="painelGrafico" prefHeight="200.0" prefWidth="200.0" visible="false" GridPane.rowIndex="2">
+                     <center>
+                        <LineChart fx:id="graficoFaixaEtaria" title="Faixa etária dos inscritos por ano" BorderPane.alignment="CENTER">
+                          <xAxis>
+                            <CategoryAxis animated="false" label="ANO" side="BOTTOM" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis label="QUANTIDADE DE INSCRITOS" side="LEFT" />
+                          </yAxis>
+                        </LineChart>
+                     </center>
+                  </BorderPane>
                </children>
             </GridPane>
          </center>

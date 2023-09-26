@@ -5,33 +5,17 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.ToolBar;
-import javafx.scene.text.Text;
 import edu.models.DadosEnemAntigo;
 import edu.models.DadosEnemNovo;
 
 public class FaixaEtariaController extends ControllerBase implements Initializable {
-
-  @FXML
-  private ToolBar barraAnalise;
-
-  @FXML
-  private Button botaoInicio;
-
-  @FXML
-  private Button botaoLimparGrafico;
-
-  @FXML
-  private Button botaoPlotar;
 
   @FXML
   private LineChart<String, Number> graficoFaixaEtaria;
@@ -54,9 +38,6 @@ public class FaixaEtariaController extends ControllerBase implements Initializab
   @FXML
   private MenuButton menuPeriodoInicial;
 
-  @FXML
-  private Text tituloTexto;
-
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     configurarMenu(menuFaixaEtaria);
@@ -64,43 +45,7 @@ public class FaixaEtariaController extends ControllerBase implements Initializab
 
   @FXML
   void voltarAoInicio(ActionEvent event) throws IOException {
-    localizacaoArquivo = "../views/";
-    setStage(loadFXML(localizacaoArquivo, "tela_inicial"), event);
-  }
-  
-  @FXML
-  void iniciarAnalise(ActionEvent event) {
-    limparGrafico(event);
-    int anoPeriodoInicial;
-    int anoPeriodoFinal;
-    if (event.getSource().equals(menuItemEnemAntigo)) {
-      menuModeloEnem.setText(menuItemEnemAntigo.getText());
-      anoPeriodoInicial = 1998;
-      anoPeriodoFinal = 2008;
-    }
-    else {
-      menuModeloEnem.setText(menuItemEnemNovo.getText());
-      anoPeriodoInicial = 2009;
-      anoPeriodoFinal = 2022;
-    }
-    
-    menuPeriodoInicial.getItems().clear();
-    menuPeriodoInicial.setText("Início");
-    menuPeriodoFinal.getItems().clear();
-    menuPeriodoFinal.setText("Fim");
-
-    for (int ano = anoPeriodoInicial; ano <= anoPeriodoFinal; ano++) {
-      MenuItem itemAnoInicial = new MenuItem("" + ano);
-      MenuItem itemAnoFinal = new MenuItem("" + ano);
-      menuPeriodoInicial.getItems().add(itemAnoInicial);
-      menuPeriodoFinal.getItems().add(itemAnoFinal);
-    }
-
-    barraAnalise.setVisible(true);
-    graficoFaixaEtaria.setVisible(true);
-
-    configurarMenu(menuPeriodoInicial);
-    configurarMenu(menuPeriodoFinal);
+    voltarAoInicioBase(event);
   }
 
   @FXML
@@ -112,6 +57,12 @@ public class FaixaEtariaController extends ControllerBase implements Initializab
   }
 
   @FXML
+  void iniciarAnalise(ActionEvent event) {
+    limparGrafico(event);
+    iniciarAnaliseBase(event);
+  }
+
+  @FXML
   void plotarGrafico(ActionEvent event) {
     Integer periodoInicial;
     Integer periodoFinal;
@@ -120,7 +71,7 @@ public class FaixaEtariaController extends ControllerBase implements Initializab
       periodoInicial = Integer.parseInt(menuPeriodoInicial.getText());
       periodoFinal = Integer.parseInt(menuPeriodoFinal.getText());
       faixaEtaria = menuFaixaEtaria.getText();
-      if (itemEstaDesabilitado(faixaEtaria))
+      if (itemEstaDesabilitado(faixaEtaria, menuFaixaEtaria))
         throw new IOException("A faixa etária já foi selecionada!");
       else if (faixaEtaria.equals("Selecione a faixa etária"))
         throw new IOException("É preciso selecionar a faixa etária!");
@@ -138,9 +89,6 @@ public class FaixaEtariaController extends ControllerBase implements Initializab
       return;
     }
 
-    XYChart.Series<String, Number> series = new XYChart.Series<>();
-    series.setName(faixaEtaria);
-
     try {
       int diferencaPeriodo = periodoFinal - periodoInicial;
       if (diferencaPeriodo < 0)
@@ -154,6 +102,9 @@ public class FaixaEtariaController extends ControllerBase implements Initializab
       alerta.showAndWait();
       return;
     }
+
+    XYChart.Series<String, Number> series = new XYChart.Series<>();
+    series.setName(faixaEtaria);
 
     menuPeriodoInicial.setDisable(true);
     menuPeriodoFinal.setDisable(true);
@@ -171,20 +122,7 @@ public class FaixaEtariaController extends ControllerBase implements Initializab
 
       series.getData().add(new XYChart.Data("" + ano, dado));
     }
+
     graficoFaixaEtaria.getData().add(series);
-  }
-
-  private boolean itemEstaDesabilitado(String nomeItem) {
-    boolean estaDesabilitado = false;
-    MenuItem itemDoMenu = menuFaixaEtaria.getItems().stream().reduce(menuItemEnemAntigo, (itemAntigo, item) -> {
-      if (item.getText().equals(nomeItem))
-        itemAntigo = item;
-      return itemAntigo;
-    });
-
-    if (itemDoMenu.isDisable())
-      estaDesabilitado = true;
-
-    return estaDesabilitado;
   }
 }
