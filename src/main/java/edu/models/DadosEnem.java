@@ -32,7 +32,7 @@ public abstract class DadosEnem {
     int contagemNaoInformados = 0;
     
     for (String codigo : colunaIdade) {
-      int codigoNum = Integer.parseInt(codigo);
+      Integer codigoNum = Integer.parseInt(codigo);
 
       if (codigoNum == 1)
         incrementarEm(relacaoIdade, "Menor de 17 anos");
