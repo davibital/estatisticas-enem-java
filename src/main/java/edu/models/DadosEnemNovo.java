@@ -90,25 +90,10 @@ public class DadosEnemNovo extends DadosEnem {
     return obterRelacaoPresenca(arquivoCSV.obterColuna("TP_PRESENCA_MT"));
   }
 
-  public Map<String, Double> obterMediaNotasProvaObjetiva() {
-    Map<String, Double> mediaPorAreaConhecimento = new TreeMap<>();
-    double mediaCN = obterMediaValores(arquivoCSV.obterColuna("NU_NOTA_CN"));
-    double mediaCH = obterMediaValores(arquivoCSV.obterColuna("NU_NOTA_CH"));
-    double mediaLC = obterMediaValores(arquivoCSV.obterColuna("NU_NOTA_LC"));
-    double mediaMT = obterMediaValores(arquivoCSV.obterColuna("NU_NOTA_MT"));
-
-    mediaPorAreaConhecimento.put("Ciencias da Natureza e suas Tecnologias", mediaCN);
-    mediaPorAreaConhecimento.put("Ciencias Humanas e suas Tecnologias", mediaCH);
-    mediaPorAreaConhecimento.put("Linguagens, Códigos e suas Tecnologias", mediaLC);
-    mediaPorAreaConhecimento.put("Matemática e suas Tecnologias", mediaMT);
-
-    return mediaPorAreaConhecimento;
-  }
-
   public List<String> obterAreasConhecimento() {
     return new ArrayList<>(Arrays.asList("Ciencias da Natureza e suas Tecnologias", "Ciencias Humanas e suas Tecnologias", "Linguagens, Códigos e suas Tecnologias", "Matemática e suas Tecnologias")) ;
   }
-/* 
+
   public double obterMediaProvaCN() {
     return obterMediaValores(arquivoCSV.obterColuna("NU_NOTA_CN"));
   }
@@ -123,6 +108,6 @@ public class DadosEnemNovo extends DadosEnem {
 
   public double obterMediaProvaMT() {
     return obterMediaValores(arquivoCSV.obterColuna("NU_NOTA_MT"));
-  } */
+  }
   
 }
