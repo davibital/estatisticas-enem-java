@@ -30,14 +30,6 @@ public class TelaInicialController extends ControllerBase implements Initializab
   private Button botaoMediaRedacao;
 
   @FXML
-  private Button botaoPresenca;
-
-  @FXML
-  void analisarPresenca(ActionEvent event) throws IOException {
-    setStage(loadFXML(localizacaoArquivo, "presenca"), event);
-  }
-
-  @FXML
   void analisarFaixaEtaria(ActionEvent event) throws IOException {
     setStage(loadFXML(localizacaoArquivo, "faixa_etaria"), event);
   }
