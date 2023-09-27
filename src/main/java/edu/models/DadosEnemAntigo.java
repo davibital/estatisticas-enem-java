@@ -59,11 +59,13 @@ public class DadosEnemAntigo extends DadosEnem {
     List<String> colunaUF = arquivoCSV.obterColuna("SG_UF_RESIDENCIA");
 
     for (String uf : colunaUF) {
-      if (!relacao.containsKey(uf)) {
-        relacao.put(uf, 1);
-      } else {
-        int valorAntigo = relacao.get(uf);
-        relacao.put(uf, valorAntigo + 1);
+      if (!uf.equals("")) {
+        if (!relacao.containsKey(uf)) {
+          relacao.put(uf, 1);
+        } else {
+          int valorAntigo = relacao.get(uf);
+          relacao.put(uf, valorAntigo + 1);
+        }
       }
     }
 
