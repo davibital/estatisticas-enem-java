@@ -65,6 +65,7 @@ public class GeneroController extends ControllerBase {
     graficoGenero.getData().clear();
     menuPeriodoInicial.setDisable(false);
     menuPeriodoFinal.setDisable(false);
+    botaoPlotar.setDisable(false);
   }
 
   @FXML
@@ -85,29 +86,26 @@ public class GeneroController extends ControllerBase {
     if (!periodoValido(periodoInicial, periodoFinal))
       return;
 
-    Set<String> categorias = new DadosEnemAntigo(1998).obterNumeroInscritosPorGenero().keySet();
-    Map<String, XYChart.Series<String, Number>> seriesMap = new TreeMap<>();
-    seriesMap.put("Masculino", new XYChart.Series<>());
-    seriesMap.put("Feminino", new XYChart.Series<>());
+    Set<String> generos = new DadosEnemAntigo(1998).obterNumeroInscritosPorGenero().keySet();
+    
+    for (String genero : generos) {
+      XYChart.Series<String, Number> serie = new XYChart.Series<>();
+      serie.setName(genero);
 
-    seriesMap.forEach((nomeSerie, serie) -> serie.setName(nomeSerie));
+      for (int ano = periodoInicial; ano <= periodoFinal; ano++) {
+        int dado = 0;
+        if (ano <= 2008) {
+          dado = new DadosEnemAntigo(ano).obterNumeroInscritosPorGenero().get(genero);
+        } else {
+          dado = new DadosEnemNovo(ano).obterNumeroInscritosPorGenero().get(genero);
+        }
 
-    for (int ano = periodoInicial; ano <= periodoFinal; ano++) {
-      Map<String, Integer> dadosGenero;
-      if (ano <= 2008) {
-        dadosGenero = new DadosEnemAntigo(ano).obterNumeroInscritosPorGenero();
-      } else {
-        dadosGenero = new DadosEnemNovo(ano).obterNumeroInscritosPorGenero();
+        serie.getData().add(new XYChart.Data<>("" + ano, dado));
       }
 
-      for (String categoriaGenero : categorias) {
-        XYChart.Series<String, Number> serieAtual = seriesMap.get(categoriaGenero);
-        int dado = dadosGenero.get(categoriaGenero);
-        serieAtual.getData().add(new XYChart.Data<>("" + ano, dado));
-      }
+      graficoGenero.getData().add(serie);
     }
-
-    seriesMap.forEach((nomeSerie, serie) -> graficoGenero.getData().add(serie));
+    
     botaoPlotar.setDisable(true);
   }
 
