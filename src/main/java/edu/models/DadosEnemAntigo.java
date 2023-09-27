@@ -29,30 +29,6 @@ public class DadosEnemAntigo extends DadosEnem {
     return Integer.parseInt(linhasTabela.get(linhasTabela.size() - 1));
   }
 
-  public Map<String, Integer> obterRelacaoPresenca() {
-    List<String> relacaoParticipantes = arquivoCSV.obterColuna("TP_PRESENCA");
-    Map<String, Integer> relacaoPresenca = new TreeMap<>();
-    relacaoPresenca.put("Presentes", 0);
-    relacaoPresenca.put("Ausentes", 0);
-    relacaoPresenca.put("Dados não informados", 0);
-
-    for (String tipoPresenca : relacaoParticipantes) {
-
-      if (tipoPresenca.equals("0"))
-        tipoPresenca = "Ausentes";
-      else if (tipoPresenca.equals("1"))
-        tipoPresenca = "Presentes";
-      else
-        tipoPresenca = "Dados não informados";
-
-      int novoValor = relacaoPresenca.get(tipoPresenca) + 1;
-
-      relacaoPresenca.put(tipoPresenca, novoValor);
-    }
-    
-    return relacaoPresenca;
-  }
-
   @Override
   public Map<String, Integer> obterRelacaoEstados() {
     Map<String, Integer> relacao = new TreeMap<>();

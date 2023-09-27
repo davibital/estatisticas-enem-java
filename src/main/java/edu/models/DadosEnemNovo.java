@@ -48,48 +48,6 @@ public class DadosEnemNovo extends DadosEnem {
     return ordenarAlfabeticamenteInt(relacao);
   }
 
-  private Map<String, Integer> obterRelacaoPresenca(List<String> relacaoParticipantes) {
-    Map<String, Integer> relacaoPresenca = new TreeMap<>();
-    relacaoPresenca.put("Ausentes", 0);
-    relacaoPresenca.put("Eliminados", 0);
-    relacaoPresenca.put("Presentes", 0);
-    relacaoPresenca.put("Dados não informados", 0);
-
-    for (String tipoPresenca : relacaoParticipantes) {
-
-      if (tipoPresenca.equals("0"))
-        tipoPresenca = "Ausentes";
-      else if (tipoPresenca.equals("1"))
-        tipoPresenca = "Presentes";
-      else if (tipoPresenca.equals("2"))
-        tipoPresenca = "Eliminados";
-      else
-        tipoPresenca = "Dados não informados";
-
-      int novoValor = relacaoPresenca.get(tipoPresenca) + 1;
-
-      relacaoPresenca.put(tipoPresenca, novoValor);
-    }
-    
-    return relacaoPresenca;
-  }
-
-  public Map<String, Integer> obterRelacaoPresencaCN() {
-    return obterRelacaoPresenca(arquivoCSV.obterColuna("TP_PRESENCA_CN"));
-  }
-
-  public Map<String, Integer> obterRelacaoPresencaCH() {
-    return obterRelacaoPresenca(arquivoCSV.obterColuna("TP_PRESENCA_CH"));
-  }
-
-  public Map<String, Integer> obterRelacaoPresencaLC() {
-    return obterRelacaoPresenca(arquivoCSV.obterColuna("TP_PRESENCA_LC"));
-  }
-
-  public Map<String, Integer> obterRelacaoPresencaMT() {
-    return obterRelacaoPresenca(arquivoCSV.obterColuna("TP_PRESENCA_MT"));
-  }
-
   public List<String> obterAreasConhecimento() {
     return new ArrayList<>(Arrays.asList("Ciencias da Natureza e suas Tecnologias", "Ciencias Humanas e suas Tecnologias", "Linguagens, Códigos e suas Tecnologias", "Matemática e suas Tecnologias")) ;
   }
