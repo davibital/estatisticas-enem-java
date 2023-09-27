@@ -61,6 +61,7 @@ public class InscritosUFController extends ControllerBase implements Initializab
   @FXML
   void limparGrafico(ActionEvent event) {
     graficoInscritosUF.getData().clear();
+    ufSelecionadas.clear();
     reiniciarMenu(menuPeriodoInicial);
     reiniciarMenu(menuPeriodoFinal);
     reiniciarMenu(menuUF);
