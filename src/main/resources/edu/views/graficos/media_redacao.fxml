@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane minHeight="350.0" minWidth="550.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.controllers.MediaRedacaoController">
+   <children>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <BorderPane maxHeight="50.0" minHeight="40.0" prefHeight="43.0" BorderPane.alignment="CENTER">
+               <center>
+                  <Text fx:id="tituloTexto" strokeType="OUTSIDE" strokeWidth="0.0" text="MÉDIA DAS REDAÇÕES" textAlignment="CENTER" textOrigin="CENTER" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <BorderPane.margin>
+                        <Insets right="120.0" />
+                     </BorderPane.margin>
+                  </Text>
+               </center>
+               <left>
+                  <Button fx:id="botaoInicio" alignment="CENTER" mnemonicParsing="false" onAction="#voltarAoInicio" text="Voltar ao início" BorderPane.alignment="CENTER">
+                     <BorderPane.margin>
+                        <Insets left="10.0" />
+                     </BorderPane.margin>
+                  </Button>
+               </left>
+            </BorderPane>
+         </top>
+         <center>
+            <GridPane BorderPane.alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="40.0" minHeight="25.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="40.0" minHeight="25.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="250.0" prefHeight="275.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <ToolBar prefHeight="27.0" prefWidth="600.0">
+                     <items>
+                        <MenuButton fx:id="menuModeloEnem" mnemonicParsing="false" text="Selecione o modelo do enem">
+                          <items>
+                            <MenuItem fx:id="menuItemEnemAntigo" mnemonicParsing="false" onAction="#iniciarAnalise" text="Modelo Antigo" />
+                            <MenuItem fx:id="menuItemEnemNovo" mnemonicParsing="false" onAction="#iniciarAnalise" text="Modelo Novo" />
+                          </items>
+                        </MenuButton>
+                     </items>
+                  </ToolBar>
+                  <ToolBar fx:id="barraAnalise" prefHeight="27.0" prefWidth="600.0" visible="false" GridPane.rowIndex="1">
+                     <items>
+                        <MenuButton fx:id="menuNota" mnemonicParsing="false" text="Nota">
+                          <items>
+                            <MenuItem mnemonicParsing="false" text="Entre 0 e 400" />
+                            <MenuItem mnemonicParsing="false" text="Entre 400 e 500" />
+                              <MenuItem mnemonicParsing="false" text="Entre 500 e 600" />
+                              <MenuItem mnemonicParsing="false" text="Entre 600 e 700" />
+                              <MenuItem mnemonicParsing="false" text="Entre 700 e 800" />
+                              <MenuItem mnemonicParsing="false" text="Entre 800 e 900" />
+                              <MenuItem mnemonicParsing="false" text="Entre 900 e 1000" />
+                          </items>
+                        </MenuButton>
+                        <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="12.0" />
+                        <Text disable="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Período:" textAlignment="CENTER" />
+                        <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="6.0" />
+                        <MenuButton fx:id="menuPeriodoInicial" mnemonicParsing="false" text="Início" />
+                        <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="6.0" />
+                        <MenuButton fx:id="menuPeriodoFinal" mnemonicParsing="false" text="Fim" />
+                        <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="6.0" />
+                        <Button fx:id="botaoPlotar" mnemonicParsing="false" onAction="#plotarGrafico" text="Plotar gráfico" textAlignment="CENTER" textOverrun="CENTER_WORD_ELLIPSIS" />
+                        <Separator layoutX="167.0" layoutY="10.0" orientation="VERTICAL" prefHeight="0.0" prefWidth="12.0" />
+                        <Button fx:id="botaoLimparGrafico" mnemonicParsing="false" onAction="#limparGrafico" text="Limpar gráfico" textAlignment="CENTER" />
+                     </items>
+                  </ToolBar>
+                  <BorderPane fx:id="painelGrafico" prefHeight="200.0" prefWidth="200.0" visible="false" GridPane.rowIndex="2">
+                     <center>
+                        <BarChart fx:id="graficoRedacao" title="Médias das notas da Redação" BorderPane.alignment="CENTER">
+                          <xAxis>
+                            <CategoryAxis animated="false" label="ANO" side="BOTTOM" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis label="MÉDIA" side="LEFT" />
+                          </yAxis>
+                        </BarChart>
+                     </center>
+                  </BorderPane>
+               </children>
+            </GridPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
