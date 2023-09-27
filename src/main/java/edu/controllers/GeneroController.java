@@ -11,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
@@ -70,6 +71,17 @@ public class GeneroController extends ControllerBase {
   void plotarGrafico(ActionEvent event) {
     Integer periodoInicial = null;
     Integer periodoFinal = null;
+    try {
+      periodoInicial = Integer.parseInt(menuPeriodoInicial.getText());
+      periodoFinal = Integer.parseInt(menuPeriodoFinal.getText());
+    } catch (NumberFormatException e) {
+      Alert alerta = new Alert(Alert.AlertType.ERROR);
+      alerta.setTitle("Erro!");
+      alerta.setContentText("É necessário informar o período a ser analisado!");
+      alerta.showAndWait();
+      return;
+    }
+
     if (!periodoValido(periodoInicial, periodoFinal))
       return;
 
