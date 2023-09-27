@@ -1,5 +1,7 @@
 package edu.models;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -98,9 +100,13 @@ public class DadosEnemNovo extends DadosEnem {
     mediaPorAreaConhecimento.put("Ciencias da Natureza e suas Tecnologias", mediaCN);
     mediaPorAreaConhecimento.put("Ciencias Humanas e suas Tecnologias", mediaCH);
     mediaPorAreaConhecimento.put("Linguagens, Códigos e suas Tecnologias", mediaLC);
-    mediaPorAreaConhecimento.put("Matemáticia e suas tecnologias", mediaMT);
+    mediaPorAreaConhecimento.put("Matemática e suas Tecnologias", mediaMT);
 
     return mediaPorAreaConhecimento;
+  }
+
+  public List<String> obterAreasConhecimento() {
+    return new ArrayList<>(Arrays.asList("Ciencias da Natureza e suas Tecnologias", "Ciencias Humanas e suas Tecnologias", "Linguagens, Códigos e suas Tecnologias", "Matemática e suas Tecnologias")) ;
   }
 /* 
   public double obterMediaProvaCN() {
