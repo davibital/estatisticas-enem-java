@@ -2,6 +2,7 @@ package edu.controllers;
 
 import java.io.IOException;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -9,7 +10,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.Alert;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.CustomMenuItem;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ToolBar;
@@ -131,14 +135,51 @@ public abstract class ControllerBase {
   protected void configurarMenu(MenuButton menu) {
     menu.getItems()
         .stream()
-        .forEach(item -> 
-          item.setOnAction(new EventHandler<ActionEvent>() {
+        .forEach(item -> item.setOnAction(new EventHandler<ActionEvent>() {
 
-            @Override
-            public void handle(ActionEvent arg0) {
-              menu.setText(item.getText());
-            }
-          })
-        );
+          @Override
+          public void handle(ActionEvent arg0) {
+            menu.setText(item.getText());
+          }
+        }));
+  }
+  
+  protected void desabilitarItensSelecionados(MenuButton menu) {
+    menu.getItems().forEach(itemMenu -> {
+      if (itemMenu instanceof CustomMenuItem) {
+        CustomMenuItem itemCustomizado = (CustomMenuItem) itemMenu;
+        CheckBox item = (CheckBox) itemCustomizado.getContent();
+        if (item.isSelected())
+          item.setDisable(true);
+      }
+    });
+  }
+
+  protected void reiniciarMenu(MenuButton menu) {
+    menu.setDisable(false);
+    menu.getItems().forEach(itemMenu -> {
+      if (itemMenu instanceof CustomMenuItem) {
+        CustomMenuItem itemCustomizado = (CustomMenuItem) itemMenu;
+        CheckBox item = (CheckBox) itemCustomizado.getContent();
+        if (item.isSelected()) {
+          item.setDisable(false);
+          item.setSelected(false);
+        }
+      } else {
+        itemMenu.setDisable(false);
+      }
+    });
+  }
+
+  protected boolean dadoExisteNoGrafico(String dado, ObservableList<Series<String, Number>> conjuntoDados) {
+    boolean dadoExistente = false;
+    for (Series<String, Number> serie : conjuntoDados) {
+      if (serie.getName().equals(dado)) {
+        dadoExistente = true;
+        break;
+      }
+    }
+
+    return dadoExistente;
   }
 }
