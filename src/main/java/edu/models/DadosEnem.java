@@ -90,20 +90,16 @@ public abstract class DadosEnem {
 
     int contagemMasculino = 0;
     int contagemFeminino = 0;
-    int contagemNaoInformados = 0;
 
     for (String elemento : colunaInscritosPorGenero) {
       if (elemento.equals("M"))
         contagemMasculino++;
       else if (elemento.equals("F"))
         contagemFeminino++;
-      else
-        contagemNaoInformados++;
     }
 
     inscritosPorGenero.put("Masculino", contagemMasculino);
     inscritosPorGenero.put("Feminino", contagemFeminino);
-    inscritosPorGenero.put("Dados não informados", contagemNaoInformados);
 
     return inscritosPorGenero;
   }

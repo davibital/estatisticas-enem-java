@@ -89,7 +89,6 @@ public class GeneroController extends ControllerBase {
     Map<String, XYChart.Series<String, Number>> seriesMap = new TreeMap<>();
     seriesMap.put("Masculino", new XYChart.Series<>());
     seriesMap.put("Feminino", new XYChart.Series<>());
-    seriesMap.put("Dados não informados", new XYChart.Series<>());
 
     seriesMap.forEach((nomeSerie, serie) -> serie.setName(nomeSerie));
 
