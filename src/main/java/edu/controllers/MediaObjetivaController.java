@@ -16,7 +16,7 @@ import javafx.scene.control.ToolBar;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 
-public class MediaController extends ControllerBase {
+public class MediaObjetivaController extends ControllerBase {
 
   @FXML
   private ToolBar barraAnalise;
