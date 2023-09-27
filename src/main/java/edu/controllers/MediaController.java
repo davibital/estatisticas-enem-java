@@ -1,8 +1,6 @@
 package edu.controllers;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 import edu.models.DadosEnemAntigo;
 import edu.models.DadosEnemNovo;
