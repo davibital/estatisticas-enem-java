@@ -64,10 +64,10 @@ public class ArquivoCSV {
         String elementoColuna = "";
         try {
           elementoColuna = linha.get(indiceColuna);
+          coluna.add(elementoColuna);
         } catch (Exception e) {
-          System.err.println("Elemento coluna vazio: " + elementoColuna);
+          System.err.println("Elemento coluna vazio!");
         }
-        coluna.add(elementoColuna);
       }
 
       varredorArquivo.close();
