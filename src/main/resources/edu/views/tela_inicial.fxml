@@ -64,11 +64,7 @@
                               <Button fx:id="botaoMediaRedacao" mnemonicParsing="false" onAction="#analisarMediaRedacao" text="MÉDIA DAS REDAÇÕES " textAlignment="JUSTIFY" BorderPane.alignment="CENTER" />
                            </center>
                         </BorderPane>
-                        <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                           <center>
-                              <Button fx:id="botaoPresenca" mnemonicParsing="false" onAction="#analisarPresenca" text="PERCENTUAL DE PRESENTES" textAlignment="JUSTIFY" BorderPane.alignment="CENTER" />
-                           </center>
-                        </BorderPane>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                            <center>
                               <Button fx:id="botaoFaixaEtaria" mnemonicParsing="false" onAction="#analisarFaixaEtaria" text="FAIXA ETÁRIA" textAlignment="JUSTIFY" BorderPane.alignment="CENTER" />
