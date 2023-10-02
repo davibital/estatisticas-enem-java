@@ -81,7 +81,7 @@
                      <center>
                         <LineChart fx:id="graficoInscritosUF" title="Inscritos em cada UF do Brasil" BorderPane.alignment="CENTER">
                           <xAxis>
-                            <CategoryAxis label="ANO" side="BOTTOM" />
+                            <CategoryAxis animated="false" label="ANO" side="BOTTOM" />
                           </xAxis>
                           <yAxis>
                             <NumberAxis label="QUANTIDADE DE INSCRITOS" side="LEFT" />
