@@ -55,6 +55,7 @@ public class TotalInscritosController extends ControllerBase {
     graficoTotalInscritos.getData().clear();
     menuPeriodoInicial.setDisable(false);
     menuPeriodoFinal.setDisable(false);
+    botaoPlotar.setDisable(false);
   }
 
   @FXML
