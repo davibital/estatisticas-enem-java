@@ -6,7 +6,7 @@ import edu.models.DadosEnemAntigo;
 import edu.models.DadosEnemNovo;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.chart.BarChart;
+import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -30,7 +30,7 @@ public class MediaRedacaoController extends ControllerBase {
   private Button botaoPlotar;
 
   @FXML
-  private BarChart<String, Number> graficoRedacao;
+  private LineChart<String, Number> graficoRedacao;
 
   @FXML
   private MenuItem menuItemEnemAntigo;

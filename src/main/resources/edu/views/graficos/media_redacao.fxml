@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.MenuButton?>
@@ -64,18 +64,6 @@
                   </ToolBar>
                   <ToolBar fx:id="barraAnalise" prefHeight="27.0" prefWidth="600.0" visible="false" GridPane.rowIndex="1">
                      <items>
-                        <MenuButton fx:id="menuNota" mnemonicParsing="false" text="Nota">
-                          <items>
-                            <MenuItem mnemonicParsing="false" text="Entre 0 e 400" />
-                            <MenuItem mnemonicParsing="false" text="Entre 400 e 500" />
-                              <MenuItem mnemonicParsing="false" text="Entre 500 e 600" />
-                              <MenuItem mnemonicParsing="false" text="Entre 600 e 700" />
-                              <MenuItem mnemonicParsing="false" text="Entre 700 e 800" />
-                              <MenuItem mnemonicParsing="false" text="Entre 800 e 900" />
-                              <MenuItem mnemonicParsing="false" text="Entre 900 e 1000" />
-                          </items>
-                        </MenuButton>
-                        <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="12.0" />
                         <Text disable="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Período:" textAlignment="CENTER" />
                         <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="6.0" />
                         <MenuButton fx:id="menuPeriodoInicial" mnemonicParsing="false" text="Início" />
@@ -89,14 +77,14 @@
                   </ToolBar>
                   <BorderPane fx:id="painelGrafico" prefHeight="200.0" prefWidth="200.0" visible="false" GridPane.rowIndex="2">
                      <center>
-                        <BarChart fx:id="graficoRedacao" title="Médias das notas da Redação" BorderPane.alignment="CENTER">
+                        <LineChart fx:id="graficoRedacao" title="Médias das notas da Redação" BorderPane.alignment="CENTER">
                           <xAxis>
                             <CategoryAxis animated="false" label="ANO" side="BOTTOM" />
                           </xAxis>
                           <yAxis>
                             <NumberAxis label="MÉDIA" side="LEFT" />
                           </yAxis>
-                        </BarChart>
+                        </LineChart>
                      </center>
                   </BorderPane>
                </children>
